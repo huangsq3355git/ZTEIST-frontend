@@ -1,16 +1,26 @@
 ---
+import Layout from '../layouts/Layout.astro'
 ---
-<!doctype html>
-<html lang="zh">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ZTEIST 中友会</title>
-  </head>
-  <body>
-    <main class="p-8">
-      <h1 class="text-2xl font-bold">ZTEIST 中友会</h1>
-      <p class="text-gray-600">同事录 / 校友录社区</p>
-    </main>
-  </body>
-</html>
+<Layout title="ZTEIST 中友会">
+  <main class="flex flex-col items-center justify-center min-h-screen px-6">
+    <div class="text-center max-w-xl w-full">
+      <h1 class="text-4xl font-bold tracking-tight mb-3">ZTEIST 中友会</h1>
+      <p class="text-xl text-gray-500 mb-10">同事录 / 校友录社区</p>
+
+      <div class="space-y-3 max-w-xs mx-auto">
+        <a href="/zh/register" class="block w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+          注册 / 加入
+        </a>
+        <a href="/zh/search" class="block w-full bg-white border border-gray-300 px-6 py-3 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+          搜索老同事
+        </a>
+      </div>
+
+      <div class="mt-10 text-sm text-gray-400">
+        <a href="/zh/register" class="hover:underline">中文</a>
+        <span class="mx-2">·</span>
+        <a href="/en/register" class="hover:underline">English</a>
+      </div>
+    </div>
+  </main>
+</Layout>
