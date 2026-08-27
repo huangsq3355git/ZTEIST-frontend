@@ -11,3 +11,7 @@ export const MEMBER_TYPE_LABEL: Record<string, { zh: string; en: string }> = {
   expert: { zh: '专家库', en: 'Expert' },
   user: { zh: '普通', en: 'Member' },
 }
+
+// 供求分类 + 项目类型
+export const SUPPLY_CATEGORIES = ['项目', '产品', '资源', '合作']
+export const PROJECT_CATEGORIES = ['出海', '本地化', '技术合作', '供应链', '落地服务']

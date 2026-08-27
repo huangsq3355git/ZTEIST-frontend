@@ -49,6 +49,18 @@ export interface Messages {
   results: string
   noResults: string
   back: string
+  // 市场/项目
+  supplyDemand: string
+  supply: string
+  demand: string
+  jobs: string
+  projects: string
+  category: string
+  title: string
+  description: string
+  budget: string
+  timeline: string
+  requirements: string
 }
 
 const zh: Messages = {
@@ -96,6 +108,17 @@ const zh: Messages = {
   results: '结果',
   noResults: '暂无结果',
   back: '返回',
+  supplyDemand: '供求',
+  supply: '供',
+  demand: '求',
+  jobs: '招聘',
+  projects: '项目',
+  category: '分类',
+  title: '标题',
+  description: '描述',
+  budget: '预算',
+  timeline: '周期',
+  requirements: '要求',
 }
 
 const en: Messages = {
@@ -143,6 +166,17 @@ const en: Messages = {
   results: 'Results',
   noResults: 'No results',
   back: 'Back',
+  supplyDemand: 'Supply & Demand',
+  supply: 'Supply',
+  demand: 'Demand',
+  jobs: 'Jobs',
+  projects: 'Projects',
+  category: 'Category',
+  title: 'Title',
+  description: 'Description',
+  budget: 'Budget',
+  timeline: 'Timeline',
+  requirements: 'Requirements',
 }
 
 export function t(lang: Lang): Messages {
