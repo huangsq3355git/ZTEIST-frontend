@@ -14,11 +14,14 @@ export interface Messages {
   nameEn: string
   country: string
   selectCountry: string
+  province: string
   eraStart: string
   eraEnd: string
   productLine: string
   role: string
   techDomain: string
+  industry: string
+  employmentStatus: string
   department: string
   level: string
   contactInfo: string
@@ -40,6 +43,9 @@ export interface Messages {
   // 搜索
   searchTitle: string
   search: string
+  filter: string
+  reset: string
+  loginRequired: string
   results: string
   noResults: string
   back: string
@@ -57,11 +63,14 @@ const zh: Messages = {
   nameEn: '英文名 / 拼音',
   country: '国家',
   selectCountry: '请选择国家',
+  province: '省份',
   eraStart: '入职年份',
   eraEnd: '离职年份',
   productLine: '产品线',
   role: '岗位',
   techDomain: '技术方向',
+  industry: '行业',
+  employmentStatus: '在职状态',
   department: '部门',
   level: '职级',
   contactInfo: '联系方式（选填，仅平台内部可见）',
@@ -81,6 +90,9 @@ const zh: Messages = {
   success: '成功',
   searchTitle: '搜索老同事',
   search: '搜索',
+  filter: '筛选',
+  reset: '重置',
+  loginRequired: '请先登录',
   results: '结果',
   noResults: '暂无结果',
   back: '返回',
@@ -98,11 +110,14 @@ const en: Messages = {
   nameEn: 'English name / pinyin',
   country: 'Country',
   selectCountry: 'Select country',
+  province: 'Province',
   eraStart: 'Start year',
   eraEnd: 'End year',
   productLine: 'Product line',
   role: 'Role',
   techDomain: 'Tech domain',
+  industry: 'Industry',
+  employmentStatus: 'Employment status',
   department: 'Department',
   level: 'Level',
   contactInfo: 'Contact (optional, platform-internal only)',
@@ -122,6 +137,9 @@ const en: Messages = {
   success: 'Success',
   searchTitle: 'Find colleagues',
   search: 'Search',
+  filter: 'Filter',
+  reset: 'Reset',
+  loginRequired: 'Please log in first',
   results: 'Results',
   noResults: 'No results',
   back: 'Back',
