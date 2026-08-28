@@ -76,6 +76,8 @@ export interface Messages {
   slogan: string
   sloganSub: string
   askZ: string
+  greetBubble: string
+  dueDiligence: string
 }
 
 const zh: Messages = {
@@ -147,6 +149,8 @@ const zh: Messages = {
   slogan: '聚是一团火，散是满天星',
   sloganSub: '我是小Z，连接每一颗闪亮之星。',
   askZ: '问问小Z',
+  greetBubble: '嗨，我是小Z 🍀',
+  dueDiligence: '背景调查',
 }
 
 const en: Messages = {
@@ -218,6 +222,8 @@ const en: Messages = {
   slogan: 'Together we blaze bright, apart we shine as starlight.',
   sloganSub: "I'm Z, connecting every shining star.",
   askZ: 'Come to ask Z',
+  greetBubble: "Hi, I'm Z 🍀",
+  dueDiligence: 'Due Diligence',
 }
 
 export function t(lang: Lang): Messages {

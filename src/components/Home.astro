@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { t, type Lang } from '../i18n'
+
+interface Props {
+  lang: Lang
+}
+const { lang } = Astro.props
+const i = t(lang)
+const prefix = lang === 'en' ? '/en' : '/zh'
+---
+<Layout title={i.brand} lang={lang}>
+  <style>
+    @keyframes fireIn {
+      0% { opacity: 0; transform: scale(0.92); filter: blur(6px); }
+      100% { opacity: 1; transform: scale(1); filter: blur(0); }
+    }
+    @keyframes starIn {
+      0% { opacity: 0; transform: translateY(16px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bubbleIn {
+      0% { opacity: 0; transform: scale(0.3); }
+      70% { transform: scale(1.08); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .anim-fire { animation: fireIn 1.1s ease both; }
+    .anim-star { animation: starIn 0.9s ease 1.4s both; }
+    .anim-later { animation: starIn 0.9s ease 2s both; }
+    .anim-bubble { animation: bubbleIn 0.5s cubic-bezier(.34,1.56,.64,1) 2.1s both; }
+  </style>
+
+  <!-- 口号 -->
+  <section class="flex flex-col items-center text-center pt-6 pb-2">
+    <h1 class="anim-fire text-2xl font-bold leading-relaxed text-black">{i.slogan}</h1>
+  </section>
+
+  <!-- 大号小Z + 招呼气泡 + 脚下文案 + 问问小Z -->
+  <section class="flex flex-col items-center text-center">
+    <div class="relative anim-star">
+      <img src="/mascot.png?v=3" alt="小Z" data-open-z class="h-[40vh] max-h-[360px] w-auto object-contain cursor-pointer" />
+      <div class="anim-bubble absolute top-4 -right-14 bg-white rounded-2xl rounded-br-none px-3 py-2 shadow-lg text-sm text-gray-800 whitespace-nowrap">
+        {i.greetBubble}
+      </div>
+    </div>
+
+    <p class="anim-star text-black text-base mt-1">{i.sloganSub}</p>
+
+    <button data-open-z class="anim-later mt-4 bg-jade text-ink px-8 py-2.5 rounded-full font-medium text-sm hover:opacity-90 transition-opacity">
+      {i.askZ}
+    </button>
+  </section>
+
+  <!-- 4 个业务模块 -->
+  <section class="anim-later grid grid-cols-4 gap-2 max-w-md mx-auto px-4 mt-6">
+    <a href={`${prefix}/people/`} class="rounded-lg border-2 border-zte-blue bg-white py-2 text-center hover:shadow-md transition-shadow">
+      <span class="block text-xl">👥</span>
+      <span class="block mt-0.5 text-xs font-semibold text-zte-navy">{i.people}</span>
+    </a>
+    <a href={`${prefix}/market/`} class="rounded-lg border-2 border-zte-red bg-white py-2 text-center hover:shadow-md transition-shadow">
+      <span class="block text-xl">🤝</span>
+      <span class="block mt-0.5 text-xs font-semibold text-zte-navy">{i.supplyDemand}</span>
+    </a>
+    <a href={`${prefix}/projects/`} class="rounded-lg border-2 border-zte-navy bg-white py-2 text-center hover:shadow-md transition-shadow">
+      <span class="block text-xl">📋</span>
+      <span class="block mt-0.5 text-xs font-semibold text-zte-navy">{i.projects}</span>
+    </a>
+    <div class="rounded-lg border-2 border-gray-200 bg-white py-2 text-center opacity-70">
+      <span class="block text-xl">🔍</span>
+      <span class="block mt-0.5 text-xs font-semibold text-zte-navy">{i.dueDiligence}</span>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-open-z]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        window.dispatchEvent(new CustomEvent('openZ'))
+      })
+    })
+  </script>
+</Layout>

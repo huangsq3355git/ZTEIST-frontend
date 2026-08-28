@@ -26,7 +26,7 @@ export default function FloatingZ({ lang, noFloating = false }: { lang: 'zh' | '
           aria-label="小Z"
           className="fixed bottom-5 right-5 z-50 h-14 w-14 rounded-full shadow-lg border-2 border-jade bg-white overflow-hidden hover:scale-110 transition-transform"
         >
-          <img src="/mascot.png?v=2" alt="小Z" className="h-full w-full object-contain" />
+          <img src="/mascot.png?v=3" alt="小Z" className="h-full w-full object-contain" />
         </button>
       )}
 
@@ -38,8 +38,8 @@ export default function FloatingZ({ lang, noFloating = false }: { lang: 'zh' | '
         >
           <div className="flex items-center justify-between px-3 py-2" style={{ background: '#002544' }}>
             <div className="flex items-center gap-2">
-              <img src="/mascot.png?v=2" alt="小Z" className="h-7 w-7 object-contain" />
-              <span className="text-sm font-semibold" style={{ color: '#39A867' }}>小Z</span>
+              <img src="/mascot.png?v=3" alt="小Z" className="h-7 w-7 object-contain" />
+              <span className="text-sm font-semibold" style={{ color: '#39A867' }}>{isZh ? '小Z' : 'Z'}</span>
             </div>
             <button onClick={() => setOpen(false)} className="text-lg" style={{ color: 'rgba(160,177,200,0.7)' }}>✕</button>
           </div>
