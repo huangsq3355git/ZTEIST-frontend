@@ -34,21 +34,21 @@ const enHref = alt('en')
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <meta name="theme-color" content="#2B333F" />
+    <meta name="theme-color" content="#002544" />
   </head>
   <body class="bg-white min-h-screen text-gray-900 antialiased flex flex-col">
-    <!-- Header：深蓝底 + 红描边，只放 LOGO + 登录 + 语言 -->
-    <header class="sticky top-0 z-20 bg-zte-navy border-b-2 border-zte-red">
+    <!-- Header：深藏青蓝底 + 翠青描边，只放 LOGO + 登录 + 语言 -->
+    <header class="sticky top-0 z-20 bg-ink border-b border-jade/20">
       <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-2">
         <a href={`${prefix}/people/`} class="flex items-center">
           <img src="/logo.png?v=2" alt={i.brand} class="h-9 w-auto" />
         </a>
-        <div class="flex items-center gap-3 text-sm text-white">
-          <a href={`${prefix}/register/`} class="hover:text-zte-red">{i.login}</a>
-          <span class="text-white/25">|</span>
+        <div class="flex items-center gap-3 text-sm text-paper">
+          <a href={`${prefix}/register/`} class="hover:text-jade">{i.login}</a>
+          <span class="text-paper/25">|</span>
           <div class="flex items-center gap-1 text-xs">
-            <a href={zhHref} class={`px-2 py-1 rounded ${lang === 'zh' ? 'bg-zte-red text-white' : 'text-white/70 hover:text-white'}`}>中文</a>
-            <a href={enHref} class={`px-2 py-1 rounded ${lang === 'en' ? 'bg-zte-red text-white' : 'text-white/70 hover:text-white'}`}>EN</a>
+            <a href={zhHref} class={`px-2 py-1 rounded ${lang === 'zh' ? 'bg-jade text-ink' : 'text-paper/70 hover:text-paper'}`}>中文</a>
+            <a href={enHref} class={`px-2 py-1 rounded ${lang === 'en' ? 'bg-jade text-ink' : 'text-paper/70 hover:text-paper'}`}>EN</a>
           </div>
         </div>
       </div>
@@ -58,15 +58,15 @@ const enHref = alt('en')
       <slot />
     </main>
 
-    <!-- Footer：深蓝底 -->
-    <footer class="bg-zte-navy">
-      <div class="mx-auto max-w-6xl px-4 py-8 text-xs text-white/70">
+    <!-- Footer：深藏青蓝底 -->
+    <footer class="bg-ink">
+      <div class="mx-auto max-w-6xl px-4 py-8 text-xs text-muted">
         <nav class="mb-4 flex flex-wrap gap-x-5 gap-y-2">
           {footerLinks.map((l) => (
-            <a href={l.href} class="hover:text-white">{l.label}</a>
+            <a href={l.href} class="hover:text-jade">{l.label}</a>
           ))}
         </nav>
-        <p>© 2026 {i.brand} · {i.brandSub}</p>
+        <p class="text-paper/60">© 2026 {i.brand} · {i.brandSub}</p>
       </div>
     </footer>
   </body>
