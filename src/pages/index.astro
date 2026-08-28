@@ -16,45 +16,48 @@ import Layout from '../layouts/Layout.astro'
     .anim-later { animation: starIn 0.9s ease 2s both; }
   </style>
 
-  <!-- 标语动画 → 小Z 居中显现 -->
-  <section class="flex flex-col items-center text-center pt-10 pb-5">
-    <h1 class="anim-fire font-serif text-3xl font-bold leading-relaxed">
-      <span class="text-zte-red">聚是一团火</span>，<span class="text-zte-blue">散是满天星</span>
-    </h1>
-    <img src="/mascot.png?v=2" alt="小Z" class="anim-star h-32 w-32 mt-5 object-contain" />
+  <!-- 口号（黑色，顶部） -->
+  <section class="flex flex-col items-center text-center pt-6 pb-2">
+    <h1 class="anim-fire text-2xl font-bold leading-relaxed text-black">聚是一团火，散是满天星</h1>
   </section>
 
-  <!-- 功能模块键：小Z 脚下 -->
-  <section class="anim-later grid grid-cols-2 gap-3 sm:grid-cols-4 max-w-md mx-auto px-4">
-    <a href="/zh/people/" class="rounded-xl border-2 border-zte-blue bg-white py-4 text-center hover:shadow-md transition-shadow">
-      <span class="block text-2xl">👥</span>
-      <span class="block mt-1 text-sm font-semibold text-zte-navy">人员</span>
+  <!-- 小Z 大图居中（半屏）+ 脚下一句话 -->
+  <section class="flex flex-col items-center text-center">
+    <img src="/mascot.png?v=2" alt="小Z" class="anim-star h-[40vh] max-h-[360px] w-auto object-contain" />
+    <p class="anim-star text-black text-base mt-1">我是小Z，带你连接每一颗星</p>
+  </section>
+
+  <!-- 4 个业务模块（缩小一半） -->
+  <section class="anim-later grid grid-cols-4 gap-2 max-w-md mx-auto px-4 mt-3">
+    <a href="/zh/people/" class="rounded-lg border-2 border-zte-blue bg-white py-2 text-center hover:shadow-md transition-shadow">
+      <span class="block text-xl">👥</span>
+      <span class="block mt-0.5 text-xs font-semibold text-zte-navy">人员</span>
     </a>
-    <a href="/zh/market/" class="rounded-xl border-2 border-zte-red bg-white py-4 text-center hover:shadow-md transition-shadow">
-      <span class="block text-2xl">🤝</span>
-      <span class="block mt-1 text-sm font-semibold text-zte-navy">供求</span>
+    <a href="/zh/market/" class="rounded-lg border-2 border-zte-red bg-white py-2 text-center hover:shadow-md transition-shadow">
+      <span class="block text-xl">🤝</span>
+      <span class="block mt-0.5 text-xs font-semibold text-zte-navy">供求</span>
     </a>
-    <a href="/zh/projects/" class="rounded-xl border-2 border-zte-navy bg-white py-4 text-center hover:shadow-md transition-shadow">
-      <span class="block text-2xl">📋</span>
-      <span class="block mt-1 text-sm font-semibold text-zte-navy">项目</span>
+    <a href="/zh/projects/" class="rounded-lg border-2 border-zte-navy bg-white py-2 text-center hover:shadow-md transition-shadow">
+      <span class="block text-xl">📋</span>
+      <span class="block mt-0.5 text-xs font-semibold text-zte-navy">项目</span>
     </a>
-    <div class="rounded-xl border-2 border-gray-200 bg-white py-4 text-center opacity-70">
-      <span class="block text-2xl">🔍</span>
-      <span class="block mt-1 text-sm font-semibold text-zte-navy">背景调查</span>
+    <div class="rounded-lg border-2 border-gray-200 bg-white py-2 text-center opacity-70">
+      <span class="block text-xl">🔍</span>
+      <span class="block mt-0.5 text-xs font-semibold text-zte-navy">背景调查</span>
     </div>
   </section>
 
-  <!-- 小搜索条（次要） -->
-  <section class="anim-later max-w-sm mx-auto mt-6 px-4">
+  <!-- 和小Z 聊天（对话式输入，替代搜索框） -->
+  <section class="anim-later max-w-sm mx-auto mt-5 px-4 pb-8">
     <form action="/zh/people/" method="get">
       <div class="flex gap-2">
         <input
           type="text"
           name="q"
-          placeholder="搜索老同事…"
-          class="flex-1 border border-gray-300 rounded-full px-4 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-jade"
+          placeholder="和小Z聊聊：找 2010 年做芯片的老同事…"
+          class="flex-1 border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-jade"
         />
-        <button type="submit" class="bg-jade text-ink px-4 py-1.5 rounded-full text-sm font-medium hover:opacity-90 shrink-0">搜索</button>
+        <button type="submit" class="bg-jade text-ink px-4 py-2 rounded-full text-sm font-medium hover:opacity-90 shrink-0">发送</button>
       </div>
     </form>
   </section>
