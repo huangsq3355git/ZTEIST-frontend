@@ -42,7 +42,7 @@ export default function FloatingZ({ lang }: { lang: 'zh' | 'en' }) {
           <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
             <div className="flex justify-start">
               <div className="max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed" style={{ background: 'rgba(255,255,255,0.05)', color: '#E6EEF7' }}>
-                {isZh ? '嗨，我是小Z 🍀\n带你连接每一颗星。' : "Hi, I'm Xiao Z 🍀\nConnecting you to every star."}
+                {isZh ? '嗨，我是小Z 🍀\n连接每一颗闪亮之星。' : "Hi, I'm Z 🍀\nConnecting every shining star."}
               </div>
             </div>
             <div className="flex justify-start">
