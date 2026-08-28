@@ -20,12 +20,12 @@ const footerLinks = [
   { href: `${prefix}/contact/`, label: i.contact },
 ]
 
-// 语言切换：有语言前缀的页换 /zh ↔ /en；根路径/邀请页切到对应语言的人员页
+// 语言切换：有语言前缀的页换 /zh ↔ /en；根路径/邀请页回首页
 const path = Astro.url.pathname
 const alt = (to: 'zh' | 'en') =>
   path.startsWith('/zh/') || path.startsWith('/en/')
     ? path.replace(/^\/(zh|en)/, '/' + to)
-    : '/' + to + '/people/'
+    : '/'
 const zhHref = alt('zh')
 const enHref = alt('en')
 ---
