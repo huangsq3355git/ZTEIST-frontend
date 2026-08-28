@@ -12,54 +12,50 @@ import Layout from '../layouts/Layout.astro'
       100% { opacity: 1; transform: translateY(0); }
     }
     .anim-fire { animation: fireIn 1.1s ease both; }
-    .anim-star { animation: starIn 0.9s ease 1.5s both; }
-    .anim-later { animation: starIn 0.9s ease 2.1s both; }
+    .anim-star { animation: starIn 0.9s ease 1.4s both; }
+    .anim-later { animation: starIn 0.9s ease 2s both; }
   </style>
 
-  <!-- 标语动画 → 吉祥物显现 -->
-  <section class="flex flex-col items-center text-center pt-12 pb-8">
+  <!-- 标语动画 → 小Z 居中显现 -->
+  <section class="flex flex-col items-center text-center pt-10 pb-5">
     <h1 class="anim-fire font-serif text-3xl font-bold leading-relaxed">
       <span class="text-zte-red">聚是一团火</span>，<span class="text-zte-blue">散是满天星</span>
     </h1>
+    <img src="/mascot.png?v=2" alt="小Z" class="anim-star h-32 w-32 mt-5 object-contain" />
+  </section>
 
-    <img src="/mascot.png?v=2" alt="小Z" class="anim-star h-28 w-28 mt-6 object-contain" />
+  <!-- 功能模块键：小Z 脚下 -->
+  <section class="anim-later grid grid-cols-2 gap-3 sm:grid-cols-4 max-w-md mx-auto px-4">
+    <a href="/zh/people/" class="rounded-xl border-2 border-zte-blue bg-white py-4 text-center hover:shadow-md transition-shadow">
+      <span class="block text-2xl">👥</span>
+      <span class="block mt-1 text-sm font-semibold text-zte-navy">人员</span>
+    </a>
+    <a href="/zh/market/" class="rounded-xl border-2 border-zte-red bg-white py-4 text-center hover:shadow-md transition-shadow">
+      <span class="block text-2xl">🤝</span>
+      <span class="block mt-1 text-sm font-semibold text-zte-navy">供求</span>
+    </a>
+    <a href="/zh/projects/" class="rounded-xl border-2 border-zte-navy bg-white py-4 text-center hover:shadow-md transition-shadow">
+      <span class="block text-2xl">📋</span>
+      <span class="block mt-1 text-sm font-semibold text-zte-navy">项目</span>
+    </a>
+    <div class="rounded-xl border-2 border-gray-200 bg-white py-4 text-center opacity-70">
+      <span class="block text-2xl">🔍</span>
+      <span class="block mt-1 text-sm font-semibold text-zte-navy">背景调查</span>
+    </div>
+  </section>
 
-    <p class="anim-star text-gray-600 mt-4">你好，我是中友会助手小Z</p>
-
-    <form action="/zh/people/" method="get" class="anim-later w-full max-w-sm mt-5">
+  <!-- 小搜索条（次要） -->
+  <section class="anim-later max-w-sm mx-auto mt-6 px-4">
+    <form action="/zh/people/" method="get">
       <div class="flex gap-2">
         <input
           type="text"
           name="q"
           placeholder="搜索老同事…"
-          class="flex-1 border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-jade"
+          class="flex-1 border border-gray-300 rounded-full px-4 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-jade"
         />
-        <button type="submit" class="bg-jade text-ink px-5 py-2 rounded-full text-sm font-medium hover:opacity-90 shrink-0">搜索</button>
+        <button type="submit" class="bg-jade text-ink px-4 py-1.5 rounded-full text-sm font-medium hover:opacity-90 shrink-0">搜索</button>
       </div>
     </form>
-  </section>
-
-  <!-- 功能模块卡片 -->
-  <section class="anim-later grid grid-cols-2 gap-3 sm:grid-cols-4 max-w-3xl mx-auto">
-    <a href="/zh/people/" class="block rounded-xl border-2 border-zte-blue bg-white p-4 text-center hover:shadow-md transition-shadow">
-      <span class="block text-2xl">👥</span>
-      <span class="block mt-2 font-semibold text-zte-navy">人员</span>
-      <span class="block text-xs text-gray-500">找老同事</span>
-    </a>
-    <a href="/zh/market/" class="block rounded-xl border-2 border-zte-red bg-white p-4 text-center hover:shadow-md transition-shadow">
-      <span class="block text-2xl">🤝</span>
-      <span class="block mt-2 font-semibold text-zte-navy">供求</span>
-      <span class="block text-xs text-gray-500">供需对接</span>
-    </a>
-    <a href="/zh/projects/" class="block rounded-xl border-2 border-zte-navy bg-white p-4 text-center hover:shadow-md transition-shadow">
-      <span class="block text-2xl">📋</span>
-      <span class="block mt-2 font-semibold text-zte-navy">项目</span>
-      <span class="block text-xs text-gray-500">项目合作</span>
-    </a>
-    <div class="block rounded-xl border-2 border-gray-200 bg-white p-4 text-center opacity-70">
-      <span class="block text-2xl">🔍</span>
-      <span class="block mt-2 font-semibold text-zte-navy">背景调查</span>
-      <span class="block text-xs text-gray-400">即将上线</span>
-    </div>
   </section>
 </Layout>
