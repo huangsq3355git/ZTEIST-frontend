@@ -1,26 +1,45 @@
 ---
 import Layout from '../layouts/Layout.astro'
 ---
-<Layout title="ZTEIST 中友会">
-  <main class="flex flex-col items-center justify-center min-h-screen px-6">
-    <div class="text-center max-w-xl w-full">
-      <h1 class="text-4xl font-bold tracking-tight mb-3">ZTEIST 中友会</h1>
-      <p class="text-xl text-gray-500 mb-10">同事录 / 校友录社区</p>
-
-      <div class="space-y-3 max-w-xs mx-auto">
-        <a href="/zh/register" class="block w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-          注册 / 加入
-        </a>
-        <a href="/zh/search" class="block w-full bg-white border border-gray-300 px-6 py-3 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition-colors">
-          搜索老同事
-        </a>
+<Layout title="中友会" lang="zh">
+  <!-- 小Z Hero + 小搜索条 -->
+  <section class="flex flex-col items-center text-center pt-10 pb-8">
+    <img src="/logo.png" alt="中友会" class="h-14 w-auto mb-4" />
+    <p class="text-lg text-gray-600 mb-6">你好，我是中友会助手，帮你找老同事、对接信息</p>
+    <form action="/zh/people/" method="get" class="w-full max-w-sm">
+      <div class="flex gap-2">
+        <input
+          type="text"
+          name="q"
+          placeholder="搜索老同事…"
+          class="flex-1 border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zte-blue"
+        />
+        <button type="submit" class="bg-zte-blue text-white px-5 py-2 rounded-full text-sm font-medium hover:opacity-90 shrink-0">搜索</button>
       </div>
+    </form>
+  </section>
 
-      <div class="mt-10 text-sm text-gray-400">
-        <a href="/zh/register" class="hover:underline">中文</a>
-        <span class="mx-2">·</span>
-        <a href="/en/register" class="hover:underline">English</a>
-      </div>
+  <!-- 功能模块卡片：人员 / 供求 / 项目 / 背景调查 -->
+  <section class="grid grid-cols-2 gap-3 sm:grid-cols-4 max-w-3xl mx-auto">
+    <a href="/zh/people/" class="block rounded-xl border-2 border-zte-blue bg-white p-4 text-center hover:shadow-md transition-shadow">
+      <span class="block text-2xl">👥</span>
+      <span class="block mt-2 font-semibold text-zte-navy">人员</span>
+      <span class="block text-xs text-gray-500">找老同事</span>
+    </a>
+    <a href="/zh/market/" class="block rounded-xl border-2 border-zte-red bg-white p-4 text-center hover:shadow-md transition-shadow">
+      <span class="block text-2xl">🤝</span>
+      <span class="block mt-2 font-semibold text-zte-navy">供求</span>
+      <span class="block text-xs text-gray-500">供需对接</span>
+    </a>
+    <a href="/zh/projects/" class="block rounded-xl border-2 border-zte-navy bg-white p-4 text-center hover:shadow-md transition-shadow">
+      <span class="block text-2xl">📋</span>
+      <span class="block mt-2 font-semibold text-zte-navy">项目</span>
+      <span class="block text-xs text-gray-500">项目合作</span>
+    </a>
+    <div class="block rounded-xl border-2 border-gray-200 bg-white p-4 text-center opacity-70">
+      <span class="block text-2xl">🔍</span>
+      <span class="block mt-2 font-semibold text-zte-navy">背景调查</span>
+      <span class="block text-xs text-gray-400">即将上线</span>
     </div>
-  </main>
+  </section>
 </Layout>
