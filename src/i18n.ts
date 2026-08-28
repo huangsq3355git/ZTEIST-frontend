@@ -75,6 +75,7 @@ export interface Messages {
   // 首页标语
   slogan: string
   sloganSub: string
+  askZ: string
 }
 
 const zh: Messages = {
@@ -145,6 +146,7 @@ const zh: Messages = {
   contact: '联系',
   slogan: '聚是一团火，散是满天星',
   sloganSub: '我是小Z，连接每一颗闪亮之星。',
+  askZ: '问问小Z',
 }
 
 const en: Messages = {
@@ -215,6 +217,7 @@ const en: Messages = {
   contact: 'Contact',
   slogan: 'Together we blaze bright, apart we shine as starlight.',
   sloganSub: "I'm Z, connecting every shining star.",
+  askZ: 'Come to ask Z',
 }
 
 export function t(lang: Lang): Messages {
