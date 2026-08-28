@@ -144,7 +144,7 @@ const zh: Messages = {
   faq: 'FAQ',
   contact: '联系',
   slogan: '聚是一团火，散是满天星',
-  sloganSub: '我是小Z，带你连接每一颗星',
+  sloganSub: '我是小Z，连接每一颗闪亮之星。',
 }
 
 const en: Messages = {
@@ -214,7 +214,7 @@ const en: Messages = {
   faq: 'FAQ',
   contact: 'Contact',
   slogan: 'Together we blaze bright, apart we shine as starlight.',
-  sloganSub: "I'm 小Z, here to connect you to every star.",
+  sloganSub: "I'm Z, connecting every shining star.",
 }
 
 export function t(lang: Lang): Messages {
