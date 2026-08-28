@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css'
 import { t, type Lang } from '../i18n'
+import FloatingZ from '../components/FloatingZ.tsx'
 
 interface Props {
   title: string
@@ -71,5 +72,8 @@ const enHref = alt('en')
         <p class="text-paper/60">© 2026 {i.brand} · {i.brandSub}</p>
       </div>
     </footer>
+
+    <!-- 小Z 浮动（仅非首页，避免与首页居中大图重复） -->
+    {path !== '/' && <FloatingZ lang={lang} client:only="react" />}
   </body>
 </html>
