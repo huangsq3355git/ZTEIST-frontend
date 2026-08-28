@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import { t } from '../i18n'
+const i = t('zh')
 ---
 <Layout title="中友会" lang="zh">
   <style>
@@ -18,13 +20,13 @@ import Layout from '../layouts/Layout.astro'
 
   <!-- 口号（黑色，顶部） -->
   <section class="flex flex-col items-center text-center pt-6 pb-2">
-    <h1 class="anim-fire text-2xl font-bold leading-relaxed text-black">聚是一团火，散是满天星</h1>
+    <h1 class="anim-fire text-2xl font-bold leading-relaxed text-black">{i.slogan}</h1>
   </section>
 
   <!-- 小Z 大图居中（半屏）+ 脚下一句话 -->
   <section class="flex flex-col items-center text-center">
     <img src="/mascot.png?v=2" alt="小Z" class="anim-star h-[40vh] max-h-[360px] w-auto object-contain" />
-    <p class="anim-star text-black text-base mt-1">我是小Z，带你连接每一颗星</p>
+    <p class="anim-star text-black text-base mt-1">{i.sloganSub}</p>
   </section>
 
   <!-- 4 个业务模块（缩小一半） -->

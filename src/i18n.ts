@@ -72,6 +72,9 @@ export interface Messages {
   terms: string
   faq: string
   contact: string
+  // 首页标语
+  slogan: string
+  sloganSub: string
 }
 
 const zh: Messages = {
@@ -140,6 +143,8 @@ const zh: Messages = {
   terms: '条款',
   faq: 'FAQ',
   contact: '联系',
+  slogan: '聚是一团火，散是满天星',
+  sloganSub: '我是小Z，带你连接每一颗星',
 }
 
 const en: Messages = {
@@ -208,6 +213,8 @@ const en: Messages = {
   terms: 'Terms',
   faq: 'FAQ',
   contact: 'Contact',
+  slogan: 'Together we blaze bright, apart we shine as starlight.',
+  sloganSub: "I'm 小Z, here to connect you to every star.",
 }
 
 export function t(lang: Lang): Messages {
