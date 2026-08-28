@@ -41,7 +41,9 @@ const enHref = alt('en')
     <header class="sticky top-0 z-20 bg-ink border-b border-jade/20">
       <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-2">
         <a href={`${prefix}/people/`} class="flex items-center">
-          <img src="/logo.png?v=2" alt={i.brand} class="h-9 w-auto" />
+          <span class="inline-flex items-center bg-white rounded-lg px-2.5 py-1 shadow-sm">
+            <img src="/logo.png?v=2" alt={i.brand} class="h-8 w-auto" />
+          </span>
         </a>
         <div class="flex items-center gap-3 text-sm text-paper">
           <a href={`${prefix}/register/`} class="hover:text-jade">{i.login}</a>
