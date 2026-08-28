@@ -34,6 +34,8 @@ export interface Messages {
   submit: string
   sendCode: string
   code: string
+  nickname: string
+  password: string
   verifyLogin: string
   or: string
   // 通用
@@ -61,6 +63,15 @@ export interface Messages {
   budget: string
   timeline: string
   requirements: string
+  // Header/Footer
+  people: string
+  login: string
+  about: string
+  join: string
+  privacy: string
+  terms: string
+  faq: string
+  contact: string
 }
 
 const zh: Messages = {
@@ -95,6 +106,8 @@ const zh: Messages = {
   submit: '提交注册',
   sendCode: '发送验证码',
   code: '验证码',
+  nickname: '昵称',
+  password: '密码',
   verifyLogin: '验证并登录',
   or: '或',
   loading: '加载中…',
@@ -119,6 +132,14 @@ const zh: Messages = {
   budget: '预算',
   timeline: '周期',
   requirements: '要求',
+  people: '人员',
+  login: '登录',
+  about: '关于',
+  join: '加入',
+  privacy: '隐私',
+  terms: '条款',
+  faq: 'FAQ',
+  contact: '联系',
 }
 
 const en: Messages = {
@@ -153,6 +174,8 @@ const en: Messages = {
   submit: 'Submit',
   sendCode: 'Send code',
   code: 'Code',
+  nickname: 'Nickname',
+  password: 'Password',
   verifyLogin: 'Verify & login',
   or: 'or',
   loading: 'Loading…',
@@ -177,6 +200,14 @@ const en: Messages = {
   budget: 'Budget',
   timeline: 'Timeline',
   requirements: 'Requirements',
+  people: 'People',
+  login: 'Log in',
+  about: 'About',
+  join: 'Join',
+  privacy: 'Privacy',
+  terms: 'Terms',
+  faq: 'FAQ',
+  contact: 'Contact',
 }
 
 export function t(lang: Lang): Messages {
