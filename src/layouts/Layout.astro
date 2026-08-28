@@ -62,15 +62,18 @@ const enHref = alt('en')
       <slot />
     </main>
 
-    <!-- Footer：深藏青蓝底 -->
-    <footer class="bg-ink">
-      <div class="mx-auto max-w-6xl px-4 py-8 text-xs text-muted">
-        <nav class="mb-4 flex flex-wrap gap-x-5 gap-y-2">
-          {footerLinks.map((l) => (
-            <a href={l.href} class="hover:text-jade">{l.label}</a>
-          ))}
-        </nav>
-        <p class="text-paper/60">© 2026 {i.brand} · {i.brandSub}</p>
+    <!-- Footer：顶部橘色长条 + 深藏青蓝底 -->
+    <footer>
+      <div class="h-2 bg-zte-orange" aria-hidden="true"></div>
+      <div class="bg-ink">
+        <div class="mx-auto max-w-6xl px-4 py-8 text-xs text-muted">
+          <nav class="mb-4 flex flex-wrap gap-x-5 gap-y-2">
+            {footerLinks.map((l) => (
+              <a href={l.href} class="hover:text-jade">{l.label}</a>
+            ))}
+          </nav>
+          <p class="text-paper/60">© 2026 {i.brand} · {i.brandSub}</p>
+        </div>
       </div>
     </footer>
 
