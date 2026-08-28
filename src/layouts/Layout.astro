@@ -74,7 +74,7 @@ const enHref = alt('en')
       </div>
     </footer>
 
-    <!-- 小Z 对话框（全站；首页不显示右下角浮标，避免与大图重复） -->
-    <FloatingZ lang={lang} noFloating={path === '/'} client:only="react" />
+    <!-- 小Z 对话框（全站；中英文首页不显示右下角浮标，避免与大图重复） -->
+    <FloatingZ lang={lang} noFloating={path === '/' || path === '/en/'} client:only="react" />
   </body>
 </html>
