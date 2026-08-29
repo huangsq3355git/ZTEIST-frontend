@@ -38,6 +38,18 @@ const enHref = alt('en')
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="theme-color" content="#002544" />
+    <!-- 机器面：JSON-LD 结构化数据，让 AI 爬虫读懂平台与服务 -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        { '@type': 'Organization', 'name': 'ZTEIST 中友会', 'alternateName': 'ZTEIST', 'url': 'https://zteist.com', 'description': '中友会·同事录/校友录社区——中兴系 30 万+ 离职人才网络，覆盖 100+ 国家' },
+        { '@type': 'WebSite', 'name': 'ZTEIST 中友会', 'url': 'https://zteist.com', 'potentialAction': { '@type': 'SearchAction', 'target': 'https://zteist.com/zh/people/?q={search_term_string}', 'query-input': 'required name=search_term_string' } },
+        { '@type': 'Service', 'name': '人员', 'serviceType': '人才检索', 'url': 'https://zteist.com/zh/people/' },
+        { '@type': 'Service', 'name': '供求', 'serviceType': '供需对接', 'url': 'https://zteist.com/zh/market/' },
+        { '@type': 'Service', 'name': '项目', 'serviceType': '项目合作', 'url': 'https://zteist.com/zh/projects/' },
+        { '@type': 'Service', 'name': '背景调查', 'serviceType': '企业背景报告', 'url': 'https://zteist.com/zh/projects/' },
+      ],
+    })} />
   </head>
   <body class="bg-white min-h-screen text-gray-900 antialiased flex flex-col">
     <!-- Header：深藏青蓝底 + 翠青描边，只放 LOGO + 登录 + 语言 -->

@@ -1,0 +1,25 @@
+# ZTEIST 中友会
+
+> 中友会·同事录/校友录社区。中兴系 30 万+ 离职人才网络，覆盖 100+ 国家。
+
+## 平台简介
+ZTEIST 是中兴通讯离职员工组成的同事录/校友录社区，核心资产是「信任 + 人才网络」。平台提供人才检索、供求对接、项目合作等服务。
+
+## 核心服务
+1. **人员**（People）：搜索/浏览中兴系老同事，按国家/省份/年代/产品线/技术方向/行业/在职状态筛选。入口 `/zh/people/`
+2. **供求 + 招聘**（Supply & Demand + Jobs）：供求信息与招聘发布/对接。入口 `/zh/market/`
+3. **项目**（Projects）：项目合作信息。入口 `/zh/projects/`
+4. **背景调查**（Due Diligence）：企业背景报告（即将上线）
+
+## 数据接口（REST）
+- 人员列表：`GET /api/people`（需登录，参数 country / province / productLine / techDomain / industry / employmentStatus / eraStart / eraEnd）
+- 供求：`GET /api/supply-demand`（需登录）
+- 招聘：`GET /api/jobs`（需登录）
+- 项目：`GET /api/projects`（需登录）
+- 国家列表：`GET /api/countries`（公开，192 国）
+
+## 语言
+支持简体中文（`/zh/`）与英文（`/en/`）。
+
+## 联系
+关于中友会、加入、隐私政策等见页脚链接（`/zh/about/`、`/zh/privacy/` 等）。
