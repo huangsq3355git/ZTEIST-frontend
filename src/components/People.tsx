@@ -217,6 +217,9 @@ export default function People({ lang }: { lang: Lang }) {
                 <div className="text-sm text-gray-600 space-y-1">
                   {m.name_en && <p className="text-gray-500">{m.name_en}</p>}
                   <p>📍 {location(m)}</p>
+                  {m.referrer_name && (
+                    <p className="text-xs text-gray-400">🤝 {lang === 'zh' ? `通过 ${m.referrer_name} 推荐` : `Recommended by ${m.referrer_name}`}</p>
+                  )}
                   {(m.era_start || m.era_end) && (
                     <p>🕐 {m.era_start}{m.era_end ? `–${m.era_end}` : '–'}</p>
                   )}
