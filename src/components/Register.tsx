@@ -8,7 +8,7 @@ interface Country {
   region: string
 }
 
-const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID' // TODO: 替换为 zteist.com 的 Google OAuth Client ID
+const GOOGLE_CLIENT_ID = '131039918276-gd9jgjqkj8nnam4i2340b0qju90h8a37.apps.googleusercontent.com'
 
 export default function Register({ lang }: { lang: Lang }) {
   const i = t(lang)
