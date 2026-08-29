@@ -8,6 +8,8 @@ interface Country {
   region: string
 }
 
+const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID' // TODO: 替换为 zteist.com 的 Google OAuth Client ID
+
 export default function Register({ lang }: { lang: Lang }) {
   const i = t(lang)
   const [step, setStep] = useState<'login' | 'profile' | 'done'>('login')
@@ -47,6 +49,47 @@ export default function Register({ lang }: { lang: Lang }) {
       .then((c: Country[]) => setCountries(c))
       .catch(() => {})
   }, [])
+
+  // Google 一键登录
+  useEffect(() => {
+    if (!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID') return
+    const w = window as any
+    if (w.google) { initGoogle(w); return }
+    const script = document.createElement('script')
+    script.src = 'https://accounts.google.com/gsi/client'
+    script.async = true
+    script.defer = true
+    script.onload = () => initGoogle(window as any)
+    document.head.appendChild(script)
+  }, [])
+
+  function initGoogle(w: any) {
+    w.google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: handleGoogleCredential,
+    })
+    const btn = document.getElementById('google-btn')
+    if (btn) w.google.accounts.id.renderButton(btn, { theme: 'outline', size: 'large' })
+  }
+
+  function handleGoogleCredential(response: any) {
+    fetch('/api/auth/google', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ idToken: response.credential }),
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.token) {
+          setToken(data.token)
+          localStorage.setItem('zteist_token', data.token)
+          setStep('profile')
+        } else {
+          setError(i.error)
+        }
+      })
+      .catch(() => setError(i.error))
+  }
 
   async function sendCode() {
     if (!email.trim()) return
@@ -209,6 +252,17 @@ export default function Register({ lang }: { lang: Lang }) {
                 <button className="w-full bg-zte-blue text-white py-2 rounded-lg font-medium hover:opacity-90 disabled:opacity-50" onClick={nicknameLogin} disabled={busy}>
                   {i.login}
                 </button>
+              </div>
+            )}
+
+            {GOOGLE_CLIENT_ID !== 'YOUR_GOOGLE_CLIENT_ID' && (
+              <div className="mt-4">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="flex-1 h-px bg-gray-200"></div>
+                  <span className="text-xs text-gray-400">{i.or}</span>
+                  <div className="flex-1 h-px bg-gray-200"></div>
+                </div>
+                <div id="google-btn" className="flex justify-center"></div>
               </div>
             )}
           </div>
