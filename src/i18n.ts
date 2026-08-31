@@ -78,6 +78,13 @@ export interface Messages {
   askZ: string
   greetBubble: string
   dueDiligence: string
+  // 会员中心
+  memberCenter: string
+  myLevel: string
+  shareCode: string
+  publish: string
+  myPosts: string
+  close: string
 }
 
 const zh: Messages = {
@@ -151,6 +158,12 @@ const zh: Messages = {
   askZ: '问问小Z',
   greetBubble: '嗨，我是小Z 🍀',
   dueDiligence: '背景调查',
+  memberCenter: '会员中心',
+  myLevel: '我的等级',
+  shareCode: '专属分享码',
+  publish: '发布',
+  myPosts: '我的发布',
+  close: '下架',
 }
 
 const en: Messages = {
@@ -224,6 +237,12 @@ const en: Messages = {
   askZ: 'Come to ask Z',
   greetBubble: "Hi, I'm Z 🍀",
   dueDiligence: 'Due Diligence',
+  memberCenter: 'Member Center',
+  myLevel: 'My level',
+  shareCode: 'Invite code',
+  publish: 'Publish',
+  myPosts: 'My Posts',
+  close: 'Close',
 }
 
 export function t(lang: Lang): Messages {
