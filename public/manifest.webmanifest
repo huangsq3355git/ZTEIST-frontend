@@ -1,0 +1,14 @@
+{
+  "name": "中友会 ZTEIST",
+  "short_name": "中友会",
+  "description": "中友会·同事录/校友录社区——中兴系 30 万+ 离职人才网络",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#002544",
+  "theme_color": "#002544",
+  "icons": [
+    { "src": "/icon-pwa.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

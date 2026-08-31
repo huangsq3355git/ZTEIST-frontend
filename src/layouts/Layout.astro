@@ -4,6 +4,7 @@ import '../styles/animations.css'
 import { t, type Lang } from '../i18n'
 import FloatingZ from '../components/FloatingZ.tsx'
 import AuthNav from '../components/AuthNav.tsx'
+import InstallPwa from '../components/InstallPwa.astro'
 
 interface Props {
   title: string
@@ -39,6 +40,11 @@ const enHref = alt('en')
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="theme-color" content="#002544" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/icon-pwa.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <!-- 机器面：JSON-LD 结构化数据，让 AI 爬虫读懂平台与服务 -->
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
@@ -93,5 +99,15 @@ const enHref = alt('en')
 
     <!-- 小Z 对话框（全站；中英文首页不显示右下角浮标，避免与大图重复） -->
     <FloatingZ lang={lang} noFloating={path === '/' || path === '/en/'} client:only="react" />
+
+    <InstallPwa lang={lang} />
+
+    <script is:inline>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/sw.js').catch(function () {})
+        })
+      }
+    </script>
   </body>
 </html>

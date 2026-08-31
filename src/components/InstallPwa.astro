@@ -1,0 +1,69 @@
+---
+interface Props {
+  lang: 'zh' | 'en'
+}
+const { lang } = Astro.props
+const isZh = lang === 'zh'
+const install = isZh ? '安装到桌面' : 'Install app'
+const iosTitle = isZh ? '添加到主屏幕' : 'Add to Home Screen'
+const iosSteps = isZh
+  ? '用 Safari 打开本页 · 点底部「分享」按钮 · 选择「添加到主屏幕」'
+  : 'Open this page in Safari · Tap the Share button · Choose "Add to Home Screen"'
+const done = isZh ? '知道了' : 'Got it'
+---
+
+<button
+  id="pwa-install-btn"
+  type="button"
+  style="display:none"
+  class="fixed bottom-4 left-4 z-40 rounded-full border border-jade/40 bg-jade/90 px-3 py-1.5 text-xs font-medium text-ink shadow-md"
+>
+  {install}
+</button>
+
+<div id="pwa-ios-modal" style="display:none" class="fixed inset-0 z-50 items-center justify-center bg-black/60 p-4">
+  <div class="w-full max-w-sm space-y-4 rounded-lg border border-jade/30 bg-ink p-6">
+    <h3 id="pwa-modal-title" class="text-xl text-jade"></h3>
+    <p id="pwa-modal-steps" class="text-sm leading-relaxed text-paper/85"></p>
+    <button id="pwa-ios-close" type="button" class="w-full rounded-md bg-jade px-7 py-3 text-sm font-medium text-ink">{done}</button>
+  </div>
+</div>
+
+<script is:inline define:vars={{ iosTitle, iosSteps }}>
+  ;(function () {
+    var btn = document.getElementById('pwa-install-btn')
+    var modal = document.getElementById('pwa-ios-modal')
+    var close = document.getElementById('pwa-ios-close')
+    var modalTitle = document.getElementById('pwa-modal-title')
+    var modalSteps = document.getElementById('pwa-modal-steps')
+    if (!btn) return
+    var deferred = null
+    var standalone =
+      window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true
+    var ua = navigator.userAgent || ''
+    var isIOS = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+    function show() { btn.style.display = 'inline-flex' }
+    function hide() { btn.style.display = 'none' }
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault()
+      deferred = e
+      if (!standalone) show()
+    })
+    window.addEventListener('appinstalled', function () { deferred = null; hide() })
+    if (!standalone && isIOS) show()
+    btn.addEventListener('click', function () {
+      if (deferred) {
+        deferred.prompt()
+        deferred.userChoice.then(function () { deferred = null })
+      } else if (isIOS && modal) {
+        if (modalTitle) modalTitle.textContent = iosTitle
+        if (modalSteps) modalSteps.textContent = iosSteps
+        modal.style.display = 'flex'
+      }
+    })
+    if (close && modal) {
+      close.addEventListener('click', function () { modal.style.display = 'none' })
+      modal.addEventListener('click', function (e) { if (e.target === modal) modal.style.display = 'none' })
+    }
+  })()
+</script>
