@@ -1,10 +1,9 @@
 /**
  * Service Worker — ZTEIST
- * install: skipWaiting 立即接管。
- * activate: 清空缓存 + claim clients。
- * fetch: 直通网络、不缓存（参考 AIF 教训：缓存会导致 JS 加载失败）。
+ * 极简：只提供「可安装 PWA」能力，绝不缓存、绝不拦截页面资源。
+ * （AIF 血泪教训：SW 缓存/拦截会导致 JS 加载失败、页面白屏。）
  */
-const VERSION = 'v1.0.0'
+const VERSION = 'v1.0.1'
 
 self.addEventListener('install', () => {
   self.skipWaiting()
@@ -21,7 +20,8 @@ self.addEventListener('activate', (event) => {
 })
 
 self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    fetch(event.request.clone(), { cache: 'no-cache' }).catch(() => fetch(event.request.clone())),
-  )
+  // 纯网络直通：GET 直接交给浏览器默认网络，不缓存、不 revalidate、不 clone。
+  // 非 GET（登录/注册 POST 等）完全不碰，交给浏览器。
+  if (event.request.method !== 'GET') return
+  event.respondWith(fetch(event.request))
 })
