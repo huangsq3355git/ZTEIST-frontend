@@ -17,6 +17,7 @@ export default function Account({ lang }: { lang: Lang }) {
   const [countries, setCountries] = useState<Country[]>([])
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
+  const [copied, setCopied] = useState('')
   const [tab, setTab] = useState<'supply_demand' | 'job' | 'project'>('supply_demand')
 
   const [sdType, setSdType] = useState('')
@@ -32,6 +33,16 @@ export default function Account({ lang }: { lang: Lang }) {
   const [timeline, setTimeline] = useState('')
 
   const token = () => localStorage.getItem('zteist_token')
+
+  const shareLink = shareCode ? `https://zteist.com/${lang === 'en' ? 'en' : 'zh'}/i/${shareCode}` : ''
+
+  function copyText(text: string, key: string) {
+    if (!text) return
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(key)
+      setTimeout(() => setCopied(''), 2000)
+    }).catch(() => {})
+  }
 
   useEffect(() => {
     fetch('/api/countries')
@@ -158,10 +169,24 @@ export default function Account({ lang }: { lang: Lang }) {
             <span className="text-gray-500">{i.myLevel}：</span>
             <span className="font-semibold text-zte-blue">{memberTypeLabel()}</span>
           </div>
-          <div>
+          <div className="flex items-center gap-2">
             <span className="text-gray-500">{i.shareCode}：</span>
             <span className="font-mono font-semibold text-zte-navy">{shareCode || '—'}</span>
+            {shareCode && (
+              <button onClick={() => copyText(shareCode, 'code')} className="text-xs text-zte-blue border border-zte-blue rounded px-2 py-0.5 hover:opacity-70">
+                {copied === 'code' ? '✓' : i.copy}
+              </button>
+            )}
           </div>
+          {shareCode && (
+            <div className="flex items-center gap-2 w-full">
+              <span className="text-gray-500 shrink-0">{i.inviteLink}：</span>
+              <span className="text-xs text-gray-500 truncate">{shareLink}</span>
+              <button onClick={() => copyText(shareLink, 'link')} className="text-xs text-zte-blue border border-zte-blue rounded px-2 py-0.5 hover:opacity-70 shrink-0">
+                {copied === 'link' ? '✓' : i.copy}
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

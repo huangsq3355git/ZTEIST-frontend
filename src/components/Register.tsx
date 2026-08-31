@@ -189,7 +189,7 @@ export default function Register({ lang }: { lang: Lang }) {
       })
       const data = await r.json()
       if (!r.ok) throw new Error(data?.error ?? i.error)
-      setStep('done')
+      window.location.href = `/${lang === 'en' ? 'en' : 'zh'}/account/`
     } catch (e) {
       setError((e as Error).message || i.error)
     } finally {

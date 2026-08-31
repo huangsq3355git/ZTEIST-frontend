@@ -3,6 +3,7 @@ import '../styles/global.css'
 import '../styles/animations.css'
 import { t, type Lang } from '../i18n'
 import FloatingZ from '../components/FloatingZ.tsx'
+import AuthNav from '../components/AuthNav.tsx'
 
 interface Props {
   title: string
@@ -61,9 +62,7 @@ const enHref = alt('en')
           </span>
         </a>
         <div class="flex items-center gap-3 text-sm text-paper">
-          <a href={`${prefix}/account/`} class="hover:text-jade">{i.memberCenter}</a>
-          <span class="text-paper/25">|</span>
-          <a href={`${prefix}/register/`} class="hover:text-jade">{i.login}</a>
+          <AuthNav lang={lang} client:only="react" />
           <span class="text-paper/25">|</span>
           <div class="flex items-center gap-1 text-xs">
             <a href={zhHref} class={`px-2 py-1 rounded ${lang === 'zh' ? 'bg-jade text-ink' : 'text-paper/70 hover:text-paper'}`}>中文</a>

@@ -85,6 +85,9 @@ export interface Messages {
   publish: string
   myPosts: string
   close: string
+  copy: string
+  logout: string
+  inviteLink: string
 }
 
 const zh: Messages = {
@@ -164,6 +167,9 @@ const zh: Messages = {
   publish: '发布',
   myPosts: '我的发布',
   close: '下架',
+  copy: '复制',
+  logout: '退出',
+  inviteLink: '邀请链接',
 }
 
 const en: Messages = {
@@ -243,6 +249,9 @@ const en: Messages = {
   publish: 'Publish',
   myPosts: 'My Posts',
   close: 'Close',
+  copy: 'Copy',
+  logout: 'Logout',
+  inviteLink: 'Invite link',
 }
 
 export function t(lang: Lang): Messages {
