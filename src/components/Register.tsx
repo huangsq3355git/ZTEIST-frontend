@@ -69,7 +69,7 @@ export default function Register({ lang }: { lang: Lang }) {
       callback: handleGoogleCredential,
     })
     const btn = document.getElementById('google-btn')
-    if (btn) w.google.accounts.id.renderButton(btn, { theme: 'outline', size: 'large' })
+    if (btn) w.google.accounts.id.renderButton(btn, { theme: 'outline', size: 'large', locale: lang === 'en' ? 'en' : 'zh-CN' })
   }
 
   function handleGoogleCredential(response: any) {
@@ -80,15 +80,22 @@ export default function Register({ lang }: { lang: Lang }) {
     })
       .then((r) => r.json())
       .then((data) => {
-        if (data.token) {
-          setToken(data.token)
-          localStorage.setItem('zteist_token', data.token)
-          setStep('profile')
-        } else {
-          setError(i.error)
-        }
+        if (data.token) afterLogin(data.token)
+        else setError(i.error)
       })
       .catch(() => setError(i.error))
+  }
+
+  // 登录成功统一入口：已有档案 → 直达会员中心；无档案 → 填档案
+  function afterLogin(token: string) {
+    setToken(token)
+    localStorage.setItem('zteist_token', token)
+    fetch('/api/member/me', { headers: { Authorization: `Bearer ${token}` } })
+      .then((r) => {
+        if (r.ok) window.location.href = `/${lang === 'en' ? 'en' : 'zh'}/account/`
+        else setStep('profile')
+      })
+      .catch(() => setStep('profile'))
   }
 
   async function sendCode() {
@@ -122,9 +129,7 @@ export default function Register({ lang }: { lang: Lang }) {
       })
       const data = await r.json()
       if (!r.ok) throw new Error(data?.error ?? '')
-      setToken(data.token)
-      localStorage.setItem('zteist_token', data.token)
-      setStep('profile')
+      afterLogin(data.token)
     } catch {
       setError(i.error)
     } finally {
@@ -152,9 +157,7 @@ export default function Register({ lang }: { lang: Lang }) {
       }
       const data = await r.json()
       if (!r.ok) throw new Error(data?.error ?? '')
-      setToken(data.token)
-      localStorage.setItem('zteist_token', data.token)
-      setStep('profile')
+      afterLogin(data.token)
     } catch {
       setError(i.error)
     } finally {
