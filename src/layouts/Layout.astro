@@ -105,7 +105,7 @@ const enHref = alt('en')
     <script is:inline>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function () {
-          navigator.serviceWorker.register('/sw.js?v=1.0.1').catch(function () {})
+          navigator.serviceWorker.register('/sw.js').catch(function () {})
         })
       }
     </script>
