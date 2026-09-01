@@ -18,11 +18,13 @@
 
 ## 部署（nginx 同源托管）
 
-- 服务器静态目录 `/opt/zteist-frontend/dist`
-- 流程：本地 `npm run build` → `scp -r dist ubuntu@43.154.138.250:/opt/zteist-frontend/`
+- 服务器：`/opt/zteist-frontend`（git 仓库，ubuntu 拥有，deploy key `~/.ssh/solar_deploy`）
+- 流程：本地 `commit + push` → 服务器 `bash deploy.sh`（`git pull` → `npm install` → `build` → 冒烟）
+- 铁律：build 有 error 会 `set -e` 立刻停，不会动线上 dist（幂等，可重复执行）
 - nginx：`zteist.com` 静态服务；`/api/*` 反代后端；`/zh|en/i/{code}` 重写到 `/invite`
 
 ## 注意
 
 - 改完必须 commit + push（GitHub `huangsq3355git/ZTEIST-frontend`）
+- 部署走 `bash deploy.sh`（服务器 git pull），**不要再用 `rm -rf dist` + scp**（会制造文件缺失窗口，被 Cloudflare 缓存坏响应）
 - 静态文件更新无需 reload nginx（nginx 直接读文件）
