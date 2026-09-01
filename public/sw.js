@@ -1,9 +1,10 @@
 /**
  * Service Worker — ZTEIST
- * 极简：只提供「可安装 PWA」能力，绝不缓存、绝不拦截页面资源。
- * （AIF 血泪教训：SW 缓存/拦截会导致 JS 加载失败、页面白屏。）
+ * 极简：只提供「可安装 PWA」能力，绝不缓存。
+ * fetch：直通网络 + 强制回源校验（cache:'no-cache'），对齐 AIF，
+ *        避免浏览器 HTTP 缓存导致旧 HTML 引用已删除的旧 CSS hash → 白屏。
  */
-const VERSION = 'v1.0.1'
+const VERSION = 'v1.0.2'
 
 self.addEventListener('install', () => {
   self.skipWaiting()
@@ -20,8 +21,10 @@ self.addEventListener('activate', (event) => {
 })
 
 self.addEventListener('fetch', (event) => {
-  // 纯网络直通：GET 直接交给浏览器默认网络，不缓存、不 revalidate、不 clone。
   // 非 GET（登录/注册 POST 等）完全不碰，交给浏览器。
   if (event.request.method !== 'GET') return
-  event.respondWith(fetch(event.request))
+  // 直通网络，强制回源校验（对齐 AIF：缓存会导致旧 JS/HTML 加载失败）
+  event.respondWith(
+    fetch(event.request, { cache: 'no-cache' }).catch(() => fetch(event.request))
+  )
 })
