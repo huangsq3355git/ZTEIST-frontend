@@ -4,7 +4,7 @@ import { t, type Lang } from '../../i18n'
 
 export function getStaticPaths() {
   const langs = ['zh', 'en']
-  const pages = ['about', 'join', 'privacy', 'terms', 'faq', 'contact']
+  const pages = ['join', 'privacy', 'terms', 'faq', 'contact']
   return langs.flatMap((lang) => pages.map((page) => ({ params: { lang, page } })))
 }
 
