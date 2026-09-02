@@ -7,7 +7,7 @@ interface Message {
 }
 
 // 确定性引导问答：关键词 → 短回答 + 跳转链接（0 token）
-function matchGuide(q: string, isZh: boolean): { reply: string; link: { href: string; label: string } } | null {
+function matchGuide(q: string, isZh: boolean): { reply: string; link?: { href: string; label: string } } | null {
   const lower = q.toLowerCase()
   const p = isZh ? '/zh' : '/en'
   const guides = [
@@ -45,6 +45,14 @@ function matchGuide(q: string, isZh: boolean): { reply: string; link: { href: st
       kw: ['是什么', '关于', '介绍', '你是谁', '你叫什么', 'what is', 'about', 'who are'],
       reply: isZh ? '我是小Z 🍀，中友会的小助手。中友会是中兴离职人才的同事录/校友录社区，帮你找老同事、对接资源。' : "I'm Z 🍀, ZTEIST's assistant. ZTEIST is a colleagues-and-alumni community for former ZTE talent — helping you find colleagues and match resources.",
       link: { href: `${p}/about/`, label: isZh ? '关于我们 →' : 'About →' },
+    },
+    {
+      kw: ['你能做什么', '你能干嘛', '你会什么', '有什么功能', '功能', 'can you do', 'what can you do'],
+      reply: isZh ? '我可以帮你：① 找老同事（按国家/产品线/年代/岗位搜）② 对接供求/招聘/项目 ③ 解答平台问题。直接问我就行！' : "I can help you: ① find old colleagues (search by country/product line/era/role) ② match supply/demand/jobs/projects ③ answer platform questions. Just ask!",
+    },
+    {
+      kw: ['人工智能', 'ai吗', '对接ai', '是不是ai', 'are you ai', 'artificial'],
+      reply: isZh ? '我目前是「关键词引导 + 搜索」，0 token、不接 AI。自然语言→AI 是下一阶段，后续会接入。' : "I'm currently keyword-based guidance + search (0 tokens, no AI). Natural-language AI is planned for a later phase.",
     },
   ]
   return guides.find((g) => g.kw.some((k) => lower.includes(k))) || null
