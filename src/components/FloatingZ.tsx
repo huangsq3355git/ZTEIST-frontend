@@ -42,8 +42,8 @@ function matchGuide(q: string, isZh: boolean): { reply: string; link: { href: st
       link: { href: `${p}/contact/`, label: isZh ? '去联系页 →' : 'Contact →' },
     },
     {
-      kw: ['是什么', '关于', '介绍', 'what is', 'about', 'who are'],
-      reply: isZh ? '中友会是中兴离职人才的同事录/校友录社区。' : 'ZTEIST is a colleagues-and-alumni community for former ZTE talent.',
+      kw: ['是什么', '关于', '介绍', '你是谁', '你叫什么', 'what is', 'about', 'who are'],
+      reply: isZh ? '我是小Z 🍀，中友会的小助手。中友会是中兴离职人才的同事录/校友录社区，帮你找老同事、对接资源。' : "I'm Z 🍀, ZTEIST's assistant. ZTEIST is a colleagues-and-alumni community for former ZTE talent — helping you find colleagues and match resources.",
       link: { href: `${p}/about/`, label: isZh ? '关于我们 →' : 'About →' },
     },
   ]
