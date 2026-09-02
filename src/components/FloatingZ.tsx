@@ -47,8 +47,8 @@ function matchGuide(q: string, isZh: boolean): { reply: string; link?: { href: s
       link: { href: `${p}/about/`, label: isZh ? '关于我们 →' : 'About →' },
     },
     {
-      kw: ['你能做什么', '你能干嘛', '你会什么', '有什么功能', '功能', 'can you do', 'what can you do'],
-      reply: isZh ? '我可以帮你：① 找老同事（按国家/产品线/年代/岗位搜）② 对接供求/招聘/项目 ③ 解答平台问题。直接问我就行！' : "I can help you: ① find old colleagues (search by country/product line/era/role) ② match supply/demand/jobs/projects ③ answer platform questions. Just ask!",
+      kw: ['做什么', '做啥', '干嘛', '会什么', '功能', '使用', '怎么用', 'can you do', 'what can you do', 'help'],
+      reply: isZh ? '我可以帮你：① 找老同事（按国家/产品线/年代/岗位搜）② 对接供求/招聘/项目 ③ 解答平台问题。直接输入问题问我就行！' : "I can help you: ① find old colleagues (search by country/product line/era/role) ② match supply/demand/jobs/projects ③ answer platform questions. Just type your question!",
     },
     {
       kw: ['人工智能', 'ai吗', '对接ai', '是不是ai', 'are you ai', 'artificial'],
