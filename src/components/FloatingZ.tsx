@@ -3,6 +3,51 @@ import { useEffect, useRef, useState } from 'react'
 interface Message {
   role: 'user' | 'ai'
   text: string
+  link?: { href: string; label: string }
+}
+
+// 确定性引导问答：关键词 → 短回答 + 跳转链接（0 token）
+function matchGuide(q: string, isZh: boolean): { reply: string; link: { href: string; label: string } } | null {
+  const lower = q.toLowerCase()
+  const p = isZh ? '/zh' : '/en'
+  const guides = [
+    {
+      kw: ['加入', '注册', '怎么进', 'join', 'register', 'sign up', 'enroll'],
+      reply: isZh ? '在 ZTE 或国内外子公司工作过即可加入。' : 'Anyone who has worked at ZTE or its subsidiaries can join.',
+      link: { href: `${p}/join/`, label: isZh ? '去加入 →' : 'Join →' },
+    },
+    {
+      kw: ['找人', '搜人', '老同事', '同事', 'find', 'search', 'colleague'],
+      reply: isZh ? '按国家、产品线、年代、岗位等标签搜索。' : 'Search by country, product line, era, role, and more.',
+      link: { href: `${p}/people/`, label: isZh ? '去人员页 →' : 'People →' },
+    },
+    {
+      kw: ['发布', '供求', '招聘', '项目', 'post', 'publish', 'job', 'project', 'supply', 'demand'],
+      reply: isZh ? '登录后进入会员中心即可发布。' : 'Log in and publish from the Member Center.',
+      link: { href: `${p}/account/`, label: isZh ? '去会员中心 →' : 'Member Center →' },
+    },
+    {
+      kw: ['隐私', '联系方式', '手机', '微信', 'privacy', 'contact info', 'phone', 'wechat'],
+      reply: isZh ? '联系方式按分级可见（认证会员、同部门、管理员等）。' : 'Contact information is visible by tier.',
+      link: { href: `${p}/privacy/`, label: isZh ? '看隐私政策 →' : 'Privacy →' },
+    },
+    {
+      kw: ['收费', '会员', '免费', '价格', 'fee', 'price', 'member', 'cost', 'paid'],
+      reply: isZh ? '核心功能免费；支持会员 99 元/年，企业服务另议。' : 'Core features are free; Supporting Member is ¥99/yr.',
+      link: { href: `${p}/account/`, label: isZh ? '看会员档位 →' : 'Membership →' },
+    },
+    {
+      kw: ['联系', '客服', '邮箱', 'contact', 'support', 'email', 'help'],
+      reply: isZh ? '邮箱：support@zteist.com' : 'Email: support@zteist.com',
+      link: { href: `${p}/contact/`, label: isZh ? '去联系页 →' : 'Contact →' },
+    },
+    {
+      kw: ['是什么', '关于', '介绍', 'what is', 'about', 'who are'],
+      reply: isZh ? '中友会是中兴离职人才的同事录/校友录社区。' : 'ZTEIST is a colleagues-and-alumni community for former ZTE talent.',
+      link: { href: `${p}/about/`, label: isZh ? '关于我们 →' : 'About →' },
+    },
+  ]
+  return guides.find((g) => g.kw.some((k) => lower.includes(k))) || null
 }
 
 export default function FloatingZ({ lang, noFloating = false }: { lang: 'zh' | 'en'; noFloating?: boolean }) {
@@ -36,6 +81,13 @@ export default function FloatingZ({ lang, noFloating = false }: { lang: 'zh' | '
     setMessages((prev) => [...prev, { role: 'user', text: q }])
     setBusy(true)
     try {
+      // 1. 确定性引导问答（0 token，命中即答）
+      const guide = matchGuide(q, isZh)
+      if (guide) {
+        setMessages((prev) => [...prev, { role: 'ai', text: guide.reply, link: guide.link }])
+        return
+      }
+      // 2. 人名搜索
       const token = localStorage.getItem('zteist_token')
       if (!token) {
         setMessages((prev) => [...prev, { role: 'ai', text: isZh ? '请先登录 / 注册后再搜索。' : 'Please log in first.' }])
@@ -88,11 +140,16 @@ export default function FloatingZ({ lang, noFloating = false }: { lang: 'zh' | '
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div
-                  className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${
+                  className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
                     m.role === 'user' ? 'bg-jade/15 text-gray-800' : 'bg-gray-100 text-gray-800'
                   }`}
                 >
-                  {m.text}
+                  <p className="whitespace-pre-wrap">{m.text}</p>
+                  {m.link && (
+                    <a href={m.link.href} className="mt-1.5 inline-block font-medium text-zte-blue underline">
+                      {m.link.label}
+                    </a>
+                  )}
                 </div>
               </div>
             ))}
