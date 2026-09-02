@@ -41,6 +41,7 @@ export default function People({ lang }: { lang: Lang }) {
   const [results, setResults] = useState<PublicMember[] | null>(null)
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
+  const [detail, setDetail] = useState<any | null>(null)
 
   useEffect(() => {
     fetch('/api/countries')
@@ -103,6 +104,19 @@ export default function People({ lang }: { lang: Lang }) {
     setEmploymentStatus('')
     setEraStart('')
     setEraEnd('')
+  }
+
+  async function viewDetail(id: number) {
+    const token = localStorage.getItem('zteist_token')
+    if (!token) return
+    try {
+      const r = await fetch(`/api/member/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+      const d = await r.json()
+      if (!r.ok) throw new Error()
+      setDetail(d)
+    } catch {
+      setError(i.error)
+    }
   }
 
   const input =
@@ -229,8 +243,50 @@ export default function People({ lang }: { lang: Lang }) {
                   {m.industry && <p>{i.industry}: {m.industry}</p>}
                   {m.level && <p>{i.level}: {m.level}</p>}
                 </div>
+                <button
+                  onClick={() => viewDetail(m.id)}
+                  className="mt-3 w-full text-xs text-zte-blue border border-zte-blue rounded-lg py-1.5 hover:opacity-70"
+                >
+                  {lang === 'zh' ? '查看详情' : 'View details'}
+                </button>
               </div>
             ))}
+          </div>
+        </div>
+      )}
+
+      {/* 档案详情弹窗（联系方式按隐私分级） */}
+      {detail && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={() => setDetail(null)}>
+          <div className="bg-white rounded-xl p-6 max-w-md w-full max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold text-zte-navy">
+                {detail.name}{detail.name_en ? ` (${detail.name_en})` : ''}
+              </h3>
+              <button onClick={() => setDetail(null)} className="text-gray-400 hover:text-gray-600 text-xl leading-none">✕</button>
+            </div>
+            <div className="text-sm text-gray-600 space-y-1.5 mb-4">
+              {detail.country && <p>📍 {location(detail as PublicMember)}</p>}
+              {(detail.era_start || detail.era_end) && <p>🕐 {detail.era_start}{detail.era_end ? `–${detail.era_end}` : '–'}</p>}
+              {detail.product_line && <p>{i.productLine}: {detail.product_line}</p>}
+              {detail.role && <p>{i.role}: {detail.role}</p>}
+              {detail.tech_domain && <p>{i.techDomain}: {detail.tech_domain}</p>}
+              {detail.department && <p>{lang === 'zh' ? '部门' : 'Department'}: {detail.department}</p>}
+              {detail.industry && <p>{i.industry}: {detail.industry}</p>}
+              {detail.level && <p>{i.level}: {detail.level}</p>}
+            </div>
+            <div className="border-t border-gray-100 pt-3 text-sm space-y-1">
+              <p className="font-medium text-zte-navy mb-2">{lang === 'zh' ? '联系方式' : 'Contact'}</p>
+              {detail.wechat && <p>{lang === 'zh' ? '微信' : 'WeChat'}: {detail.wechat}</p>}
+              {detail.phone && <p>{lang === 'zh' ? '手机' : 'Phone'}: {detail.phone}</p>}
+              {detail.linkedin && <p>LinkedIn: {detail.linkedin}</p>}
+              {detail.whatsapp && <p>WhatsApp: {detail.whatsapp}</p>}
+              {!detail.wechat && !detail.phone && !detail.linkedin && !detail.whatsapp && (
+                <p className="text-gray-400">
+                  {lang === 'zh' ? '联系方式仅认证会员、同部门同事或管理员可见。' : 'Contact info is visible only to verified members, same-department colleagues, or admins.'}
+                </p>
+              )}
+            </div>
           </div>
         </div>
       )}
