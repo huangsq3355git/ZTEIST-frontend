@@ -13,20 +13,8 @@ export default function AuthNav({ lang }: { lang: Lang }) {
     return () => window.removeEventListener('storage', check)
   }, [])
 
-  function logout() {
-    localStorage.removeItem('zteist_token')
-    setLoggedIn(false)
-    window.location.href = `${prefix}/`
-  }
-
   if (loggedIn) {
-    return (
-      <>
-        <a href={`${prefix}/account/`} className="hover:text-jade">{i.memberCenter}</a>
-        <span className="text-paper/25">|</span>
-        <button onClick={logout} className="hover:text-jade">{i.logout}</button>
-      </>
-    )
+    return <a href={`${prefix}/account/`} className="hover:text-jade">{i.memberCenter}</a>
   }
   return <a href={`${prefix}/register/`} className="hover:text-jade">{i.login}</a>
 }

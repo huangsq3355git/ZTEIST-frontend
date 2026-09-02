@@ -132,6 +132,11 @@ export default function Account({ lang }: { lang: Lang }) {
     if (r.ok) await load()
   }
 
+  function logout() {
+    localStorage.removeItem('zteist_token')
+    window.location.href = `/${lang === 'en' ? 'en' : 'zh'}/`
+  }
+
   const input =
     'w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zte-blue'
   const label = 'block text-sm font-medium mb-1 text-zte-navy'
@@ -160,7 +165,10 @@ export default function Account({ lang }: { lang: Lang }) {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6 text-zte-navy">{i.memberCenter}</h1>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-bold text-zte-navy">{i.memberCenter}</h1>
+        <button onClick={logout} className="text-sm text-zte-red hover:opacity-70">{i.logout}</button>
+      </div>
 
       {/* 我的身份 */}
       <section className="bg-white p-5 rounded-xl shadow-sm mb-6">
