@@ -134,7 +134,7 @@ export default function Account({ lang }: { lang: Lang }) {
 
   function logout() {
     localStorage.removeItem('zteist_token')
-    window.location.href = `/${lang === 'en' ? 'en' : 'zh'}/`
+    window.location.href = lang === 'en' ? '/en/' : '/'
   }
 
   const input =
