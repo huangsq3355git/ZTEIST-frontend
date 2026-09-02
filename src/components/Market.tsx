@@ -61,6 +61,7 @@ export default function Market({ lang }: { lang: Lang }) {
     if (sdType) p.set('type', sdType)
     if (sdCategory) p.set('category', sdCategory)
     if (sdCountry) p.set('country', sdCountry)
+    p.set('lang', lang)
     const d = await get('/api/supply-demand', p)
     if (d) setSdList(d)
   }
@@ -69,6 +70,7 @@ export default function Market({ lang }: { lang: Lang }) {
     const p = new URLSearchParams()
     if (jobRole) p.set('role', jobRole)
     if (jobCountry) p.set('country', jobCountry)
+    p.set('lang', lang)
     const d = await get('/api/jobs', p)
     if (d) setJobList(d)
   }

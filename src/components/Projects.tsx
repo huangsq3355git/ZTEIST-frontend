@@ -41,6 +41,7 @@ export default function Projects({ lang }: { lang: Lang }) {
     const p = new URLSearchParams()
     if (category) p.set('category', category)
     if (country) p.set('country', country)
+    p.set('lang', lang)
     try {
       const r = await fetch(`/api/projects?${p}`, { headers: { Authorization: `Bearer ${t}` } })
       const d = await r.json()

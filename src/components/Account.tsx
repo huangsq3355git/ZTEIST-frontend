@@ -82,7 +82,7 @@ export default function Account({ lang }: { lang: Lang }) {
     }
     setBusy(true)
     setError('')
-    const body: any = { kind: tab, title, country }
+    const body: any = { kind: tab, title, country, lang }
     if (tab === 'supply_demand') {
       body.type = sdType
       body.category = sdCategory
