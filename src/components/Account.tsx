@@ -148,13 +148,13 @@ export default function Account({ lang }: { lang: Lang }) {
       ? [
           { name: '观察期', price: '免费', benefits: ['浏览基础信息'] },
           { name: '认证会员', price: '免费（推荐认证）', benefits: ['全量检索', '发布信息', '联系方式可见'] },
-          { name: '支持会员', price: '99 元/年（国内）· $9.9/年（海外）', benefits: ['支持社区运营', '加入网络', '过滤噪音'] },
+          { name: '支持会员', price: '99 元/年（国内）· $9.9/年（海外）', benefits: ['支持者徽章', '发布信息优先曝光', '高级检索（完整结果）', '主动联系更多会员', '线下活动优先报名'] },
           { name: '企业会员', price: '1999-4999 元/年', benefits: ['发布需求', '检索人才', '基础对接'] },
         ]
       : [
           { name: 'Trial', price: 'Free', benefits: ['Basic browsing'] },
           { name: 'Verified Member', price: 'Free (by referral)', benefits: ['Full search', 'Publish', 'Contact visible'] },
-          { name: 'Supporting Member', price: '¥99/yr (CN) · $9.9/yr (overseas)', benefits: ['Support the community', 'Join network', 'Filter noise'] },
+          { name: 'Supporting Member', price: '¥99/yr (CN) · $9.9/yr (overseas)', benefits: ['Supporter badge', 'Priority listing for your posts', 'Advanced search (full results)', 'Reach out to more members', 'Priority access to offline events'] },
           { name: 'Enterprise', price: '¥1999-4999/yr', benefits: ['Post needs', 'Search talent', 'Basic matching'] },
         ]
 
