@@ -57,15 +57,14 @@ const enHref = alt('en')
         { '@type': 'Service', 'name': '背景调查', 'serviceType': '企业背景报告', 'url': 'https://zteist.com/zh/projects/' },
       ],
     })} />
-    <!-- 首页语言自动跳转：中文系统→/，其它→/en/（尊重手动选择） -->
+    <!-- 首页语言自动跳转：非中文系统→/en/（尊重手动选择；不做 /en/→/ 反向跳转，避免弹回） -->
     <script is:inline>
       ;(function () {
         if (localStorage.getItem('zteist_lang')) return
         var lang = (navigator.language || '').toLowerCase()
         var isZh = lang.indexOf('zh') === 0
         var path = window.location.pathname
-        if (isZh && path === '/en/') window.location.replace('/')
-        else if (!isZh && (path === '/' || path === '')) window.location.replace('/en/')
+        if (!isZh && (path === '/' || path === '')) window.location.replace('/en/')
       })()
     </script>
   </head>
