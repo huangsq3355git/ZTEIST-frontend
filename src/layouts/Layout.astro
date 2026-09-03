@@ -57,6 +57,17 @@ const enHref = alt('en')
         { '@type': 'Service', 'name': '背景调查', 'serviceType': '企业背景报告', 'url': 'https://zteist.com/zh/projects/' },
       ],
     })} />
+    <!-- 首页语言自动跳转：中文系统→/，其它→/en/（尊重手动选择） -->
+    <script is:inline>
+      ;(function () {
+        if (localStorage.getItem('zteist_lang')) return
+        var lang = (navigator.language || '').toLowerCase()
+        var isZh = lang.indexOf('zh') === 0
+        var path = window.location.pathname
+        if (isZh && path === '/en/') window.location.replace('/')
+        else if (!isZh && (path === '/' || path === '')) window.location.replace('/en/')
+      })()
+    </script>
   </head>
   <body class="bg-white min-h-screen text-gray-900 antialiased flex flex-col">
     <!-- Header：深藏青蓝底 + 翠青描边，只放 LOGO + 登录 + 语言 -->
@@ -71,8 +82,8 @@ const enHref = alt('en')
           <AuthNav lang={lang} client:only="react" />
           <span class="text-paper/25">|</span>
           <div class="flex items-center gap-1 text-xs">
-            <a href={zhHref} class={`px-2 py-1 rounded ${lang === 'zh' ? 'bg-jade text-ink' : 'text-paper/70 hover:text-paper'}`}>中文</a>
-            <a href={enHref} class={`px-2 py-1 rounded ${lang === 'en' ? 'bg-jade text-ink' : 'text-paper/70 hover:text-paper'}`}>EN</a>
+            <a href={zhHref} onclick="localStorage.setItem('zteist_lang','zh')" class={`px-2 py-1 rounded ${lang === 'zh' ? 'bg-jade text-ink' : 'text-paper/70 hover:text-paper'}`}>中文</a>
+            <a href={enHref} onclick="localStorage.setItem('zteist_lang','en')" class={`px-2 py-1 rounded ${lang === 'en' ? 'bg-jade text-ink' : 'text-paper/70 hover:text-paper'}`}>EN</a>
           </div>
         </div>
       </div>
