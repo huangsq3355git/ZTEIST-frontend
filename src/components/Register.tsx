@@ -192,6 +192,9 @@ export default function Register({ lang }: { lang: Lang }) {
       })
       const data = await r.json()
       if (!r.ok) throw new Error(data?.error ?? i.error)
+      if (data.inviteWarning) {
+        window.alert(lang === 'en' ? 'Invalid invite code, ignored.' : '邀请码无效，已忽略。')
+      }
       window.location.href = `/${lang === 'en' ? 'en' : 'zh'}/account/`
     } catch (e) {
       setError((e as Error).message || i.error)
