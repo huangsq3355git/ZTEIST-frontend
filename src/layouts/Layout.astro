@@ -72,12 +72,15 @@ const enHref = alt('en')
     <!-- Header：深藏青蓝底 + 翠青描边，只放 LOGO + 登录 + 语言 -->
     <header class="sticky top-0 z-20 bg-ink border-b border-jade/20">
       <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-2">
-        <a href={lang === 'en' ? '/en/' : '/'} class="flex items-center gap-2">
-          <span class="inline-flex items-center bg-white rounded-lg px-2.5 py-1 shadow-sm">
-            <img src="/logo.png?v=3" alt={i.brand} class="h-8 w-auto" />
-          </span>
-          <span class="text-sm font-medium text-paper hover:text-jade">{lang === 'en' ? 'HOME' : '首页'}</span>
-        </a>
+        <div class="flex items-center gap-3">
+          <button id="pwa-back-btn" type="button" style="display:none" class="text-xl text-paper hover:text-jade leading-none" aria-label="后退">←</button>
+          <a href={lang === 'en' ? '/en/' : '/'} class="flex items-center gap-2">
+            <span class="inline-flex items-center bg-white rounded-lg px-2.5 py-1 shadow-sm">
+              <img src="/logo.png?v=3" alt={i.brand} class="h-8 w-auto" />
+            </span>
+            <span class="text-sm font-medium text-paper hover:text-jade">{lang === 'en' ? 'HOME' : '首页'}</span>
+          </a>
+        </div>
         <div class="flex items-center gap-3 text-sm text-paper">
           <AuthNav lang={lang} client:only="react" />
           <span class="text-paper/25">|</span>
@@ -113,15 +116,15 @@ const enHref = alt('en')
 
     <InstallPwa lang={lang} />
 
-    <!-- PWA 后退按钮（仅 standalone 模式显示） -->
-    <button id="pwa-back-btn" type="button" style="display:none" class="fixed bottom-4 left-4 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 bg-white text-xl text-zte-navy shadow-md hover:opacity-70" aria-label="后退">←</button>
     <script is:inline>
       ;(function () {
         var btn = document.getElementById('pwa-back-btn')
         if (!btn) return
         var standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true
         if (!standalone) return
-        btn.style.display = 'flex'
+        var path = window.location.pathname
+        if (path === '/' || path === '/en/') return  // 首页不显示
+        btn.style.display = 'block'
         btn.addEventListener('click', function () { history.back() })
       })()
     </script>
