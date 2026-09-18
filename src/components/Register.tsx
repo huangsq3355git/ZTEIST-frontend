@@ -87,9 +87,10 @@ export default function Register({ lang }: { lang: Lang }) {
   }
 
   // 登录成功统一入口：已有档案 → 直达会员中心；无档案 → 填档案
-  function afterLogin(token: string) {
+  function afterLogin(token: string, displayName?: string) {
     setToken(token)
     localStorage.setItem('zteist_token', token)
+    if (displayName) localStorage.setItem('zteist_name', displayName)
     fetch('/api/member/me', { headers: { Authorization: `Bearer ${token}` } })
       .then((r) => {
         if (r.ok) window.location.href = `/${lang === 'en' ? 'en' : 'zh'}/account/`
@@ -129,7 +130,7 @@ export default function Register({ lang }: { lang: Lang }) {
       })
       const data = await r.json()
       if (!r.ok) throw new Error(data?.error ?? '')
-      afterLogin(data.token)
+      afterLogin(data.token, email.trim())
     } catch {
       setError(i.error)
     } finally {
@@ -157,7 +158,7 @@ export default function Register({ lang }: { lang: Lang }) {
       }
       const data = await r.json()
       if (!r.ok) throw new Error(data?.error ?? '')
-      afterLogin(data.token)
+      afterLogin(data.token, nickname.trim())
     } catch {
       setError(i.error)
     } finally {
