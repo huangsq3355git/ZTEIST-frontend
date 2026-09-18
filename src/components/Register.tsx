@@ -10,6 +10,19 @@ interface Country {
 
 const GOOGLE_CLIENT_ID = '131039918276-gd9jgjqkj8nnam4i2340b0qju90h8a37.apps.googleusercontent.com'
 
+// 从 Google ID token 解出邮箱（仅用于头像展示；token 已由后端验证）
+function decodeGoogleEmail(idToken: string): string {
+  try {
+    const parts = idToken.split('.')
+    if (parts.length < 2) return ''
+    const base64 = parts[1].replace(/-/g, '+').replace(/_/g, '/')
+    const padded = base64 + '='.repeat((4 - (base64.length % 4)) % 4)
+    return JSON.parse(atob(padded)).email || ''
+  } catch {
+    return ''
+  }
+}
+
 export default function Register({ lang }: { lang: Lang }) {
   const i = t(lang)
   const [step, setStep] = useState<'login' | 'profile' | 'done'>('login')
@@ -80,7 +93,7 @@ export default function Register({ lang }: { lang: Lang }) {
     })
       .then((r) => r.json())
       .then((data) => {
-        if (data.token) afterLogin(data.token)
+        if (data.token) afterLogin(data.token, decodeGoogleEmail(response.credential))
         else setError(i.error)
       })
       .catch(() => setError(i.error))
