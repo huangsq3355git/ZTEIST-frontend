@@ -137,6 +137,31 @@ export default function Account({ lang }: { lang: Lang }) {
     window.location.href = lang === 'en' ? '/en/' : '/'
   }
 
+  async function checkout(tier: string) {
+    const t = token()
+    if (!t) {
+      setError(i.loginRequired)
+      return
+    }
+    setBusy(true)
+    setError('')
+    try {
+      const r = await fetch('/api/membership/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${t}` },
+        body: JSON.stringify({ tier }),
+      })
+      const d = await r.json()
+      if (!r.ok) throw new Error(d?.error || i.error)
+      if (d.url) window.location.href = d.url
+      else throw new Error(i.error)
+    } catch (e) {
+      setError((e as Error).message || i.error)
+    } finally {
+      setBusy(false)
+    }
+  }
+
   const input =
     'w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zte-blue'
   const label = 'block text-sm font-medium mb-1 text-zte-navy'
@@ -219,6 +244,13 @@ export default function Account({ lang }: { lang: Lang }) {
             </div>
           ))}
         </div>
+        <button
+          onClick={() => checkout('supporter')}
+          disabled={busy}
+          className="mt-4 bg-zte-blue text-white px-6 py-2.5 rounded-lg font-medium hover:opacity-90 disabled:opacity-50"
+        >
+          {lang === 'zh' ? '升级支持会员（99 元/年）' : 'Upgrade to Supporting Member (¥99/yr)'}
+        </button>
       </section>
 
       {/* 信息发布 */}
