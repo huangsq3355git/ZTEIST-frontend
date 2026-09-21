@@ -277,11 +277,12 @@ export default function People({ lang }: { lang: Lang }) {
             </div>
             <div className="border-t border-gray-100 pt-3 text-sm space-y-1">
               <p className="font-medium text-zte-navy mb-2">{lang === 'zh' ? '联系方式' : 'Contact'}</p>
+              {detail.email && <p>Email: {detail.email}</p>}
               {detail.wechat && <p>{lang === 'zh' ? '微信' : 'WeChat'}: {detail.wechat}</p>}
               {detail.phone && <p>{lang === 'zh' ? '手机' : 'Phone'}: {detail.phone}</p>}
               {detail.linkedin && <p>LinkedIn: {detail.linkedin}</p>}
               {detail.whatsapp && <p>WhatsApp: {detail.whatsapp}</p>}
-              {!detail.wechat && !detail.phone && !detail.linkedin && !detail.whatsapp && (
+              {!detail.email && !detail.wechat && !detail.phone && !detail.linkedin && !detail.whatsapp && (
                 <p className="text-gray-400">
                   {lang === 'zh' ? '联系方式仅认证会员、同部门同事或管理员可见。' : 'Contact info is visible only to verified members, same-department colleagues, or admins.'}
                 </p>
