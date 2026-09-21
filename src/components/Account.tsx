@@ -35,6 +35,7 @@ export default function Account({ lang }: { lang: Lang }) {
   const token = () => localStorage.getItem('zteist_token')
 
   const shareLink = shareCode ? `https://zteist.com/${lang === 'en' ? 'en' : 'zh'}/i/${shareCode}` : ''
+  const contactHref = lang === 'en' ? '/en/contact/' : '/zh/contact/'
 
   function copyText(text: string, key: string) {
     if (!text) return
@@ -259,8 +260,15 @@ export default function Account({ lang }: { lang: Lang }) {
           >
             {lang === 'zh' ? '升级企业会员（1999 元/年）' : 'Upgrade to Enterprise ($299/yr)'}
           </button>
-          <a href={lang === 'en' ? '/en/contact/' : '/zh/contact/'} className="self-center text-sm text-zte-blue underline">
-            {lang === 'zh' ? '定制需求？联系我们 →' : 'Custom needs? Contact us →'}
+        </div>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <a href={contactHref} className="block bg-white p-4 rounded-xl shadow-sm border-t-2 border-zte-blue hover:opacity-90">
+            <p className="font-semibold text-zte-navy">{lang === 'zh' ? '定制需求？' : 'Custom needs?'}</p>
+            <p className="text-sm text-zte-red font-medium mt-1">{lang === 'zh' ? '企业定制 · 海外落地 · 分包对接' : 'Enterprise · Localization · Subcontracting'}</p>
+          </a>
+          <a href={contactHref} className="block bg-white p-4 rounded-xl shadow-sm border-t-2 border-zte-blue hover:opacity-90">
+            <p className="font-semibold text-zte-navy">{lang === 'zh' ? '联系我们' : 'Contact us'}</p>
+            <p className="text-sm text-zte-red font-medium mt-1">{lang === 'zh' ? '加入 · 对接 · 建议反馈' : 'Join · Matchmaking · Feedback'}</p>
           </a>
         </div>
       </section>
