@@ -149,7 +149,7 @@ export default function Account({ lang }: { lang: Lang }) {
       const r = await fetch('/api/membership/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${t}` },
-        body: JSON.stringify({ tier }),
+        body: JSON.stringify({ tier, currency: lang === 'en' ? 'usd' : 'cny' }),
       })
       const d = await r.json()
       if (!r.ok) throw new Error(d?.error || i.error)
@@ -178,14 +178,14 @@ export default function Account({ lang }: { lang: Lang }) {
       ? [
           { name: '观察期', price: '免费', benefits: ['浏览基础信息'] },
           { name: '认证会员', price: '免费（推荐认证）', benefits: ['全量检索', '发布信息', '联系方式可见'] },
-          { name: '支持会员', price: '99 元/年（国内）· $9.9/年（海外）', benefits: ['支持者徽章', '发布信息优先曝光', '高级检索（完整结果）', '主动联系更多会员', '线下活动优先报名'] },
-          { name: '企业会员', price: '1999 元/年起（定制另议）', benefits: ['发布需求', '检索人才', '基础对接'] },
+          { name: '支持会员', price: '99 元/年', benefits: ['支持者徽章', '发布信息优先曝光', '高级检索（完整结果）', '主动联系更多会员', '线下活动优先报名'] },
+          { name: '企业会员', price: '1999 元/年（定制另议）', benefits: ['发布需求', '检索人才', '基础对接'] },
         ]
       : [
           { name: 'Trial', price: 'Free', benefits: ['Basic browsing'] },
           { name: 'Verified Member', price: 'Free (by referral)', benefits: ['Full search', 'Publish', 'Contact visible'] },
-          { name: 'Supporting Member', price: '¥99/yr (CN) · $9.9/yr (overseas)', benefits: ['Supporter badge', 'Priority listing for your posts', 'Advanced search (full results)', 'Reach out to more members', 'Priority access to offline events'] },
-          { name: 'Enterprise', price: '¥1999+/yr (custom negotiable)', benefits: ['Post needs', 'Search talent', 'Basic matching'] },
+          { name: 'Supporting Member', price: '$14.88/yr', benefits: ['Supporter badge', 'Priority listing for your posts', 'Advanced search (full results)', 'Reach out to more members', 'Priority access to offline events'] },
+          { name: 'Enterprise', price: '$299/yr (custom negotiable)', benefits: ['Post needs', 'Search talent', 'Basic matching'] },
         ]
 
   return (
@@ -250,14 +250,14 @@ export default function Account({ lang }: { lang: Lang }) {
             disabled={busy}
             className="bg-zte-blue text-white px-6 py-2.5 rounded-lg font-medium hover:opacity-90 disabled:opacity-50"
           >
-            {lang === 'zh' ? '升级支持会员（99 元/年）' : 'Upgrade to Supporting Member (¥99/yr)'}
+            {lang === 'zh' ? '升级支持会员（99 元/年）' : 'Upgrade to Supporting Member ($14.88/yr)'}
           </button>
           <button
             onClick={() => checkout('enterprise')}
             disabled={busy}
             className="bg-zte-navy text-white px-6 py-2.5 rounded-lg font-medium hover:opacity-90 disabled:opacity-50"
           >
-            {lang === 'zh' ? '升级企业会员（1999 元/年）' : 'Upgrade to Enterprise (¥1999/yr)'}
+            {lang === 'zh' ? '升级企业会员（1999 元/年）' : 'Upgrade to Enterprise ($299/yr)'}
           </button>
           <a href={lang === 'en' ? '/en/contact/' : '/zh/contact/'} className="self-center text-sm text-zte-blue underline">
             {lang === 'zh' ? '定制需求？联系我们 →' : 'Custom needs? Contact us →'}
