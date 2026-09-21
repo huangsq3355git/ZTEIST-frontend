@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { t, type Lang } from '../i18n'
 import { PROJECT_CATEGORIES } from '../constants'
+import CountrySelect from './CountrySelect'
 
 interface Country {
   code: string
@@ -75,12 +76,7 @@ export default function Projects({ lang }: { lang: Lang }) {
           </div>
           <div>
             <label className={label}>{i.country}</label>
-            <select className={input} value={country} onChange={(e) => setCountry(e.target.value)}>
-              <option value="">-</option>
-              {countries.map((c) => (
-                <option key={c.code} value={c.code}>{lang === 'zh' ? c.name_zh : c.name_en}</option>
-              ))}
-            </select>
+            <CountrySelect lang={lang} countries={countries} value={country} onChange={setCountry} placeholder={i.selectCountry} />
           </div>
         </div>
         <button

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { t, type Lang } from '../i18n'
 import { PRODUCT_LINES, TECH_DOMAINS, INDUSTRIES, EMPLOYMENT_STATUSES, MEMBER_TYPE_LABEL } from '../constants'
+import CountrySelect from './CountrySelect'
 
 interface Country {
   code: string
@@ -133,14 +134,7 @@ export default function People({ lang }: { lang: Lang }) {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div>
             <label className={label}>{i.country}</label>
-            <select className={input} value={country} onChange={(e) => setCountry(e.target.value)}>
-              <option value="">{i.selectCountry}</option>
-              {countries.map((c) => (
-                <option key={c.code} value={c.code}>
-                  {lang === 'zh' ? c.name_zh : c.name_en}
-                </option>
-              ))}
-            </select>
+            <CountrySelect lang={lang} countries={countries} value={country} onChange={setCountry} placeholder={i.selectCountry} />
           </div>
           <div>
             <label className={label}>{i.province}</label>

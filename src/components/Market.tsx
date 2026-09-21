@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { t, type Lang } from '../i18n'
 import { SUPPLY_CATEGORIES } from '../constants'
+import CountrySelect from './CountrySelect'
 
 interface Country {
   code: string
@@ -120,12 +121,7 @@ export default function Market({ lang }: { lang: Lang }) {
             </div>
             <div>
               <label className={label}>{i.country}</label>
-              <select className={input} value={sdCountry} onChange={(e) => setSdCountry(e.target.value)}>
-                <option value="">-</option>
-                {countries.map((c) => (
-                  <option key={c.code} value={c.code}>{lang === 'zh' ? c.name_zh : c.name_en}</option>
-                ))}
-              </select>
+              <CountrySelect lang={lang} countries={countries} value={sdCountry} onChange={setSdCountry} placeholder={i.selectCountry} />
             </div>
           </div>
           <button
@@ -168,12 +164,7 @@ export default function Market({ lang }: { lang: Lang }) {
             </div>
             <div>
               <label className={label}>{i.country}</label>
-              <select className={input} value={jobCountry} onChange={(e) => setJobCountry(e.target.value)}>
-                <option value="">-</option>
-                {countries.map((c) => (
-                  <option key={c.code} value={c.code}>{lang === 'zh' ? c.name_zh : c.name_en}</option>
-                ))}
-              </select>
+              <CountrySelect lang={lang} countries={countries} value={jobCountry} onChange={setJobCountry} placeholder={i.selectCountry} />
             </div>
           </div>
           <button

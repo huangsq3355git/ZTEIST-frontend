@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { t, type Lang } from '../i18n'
 import { MEMBER_TYPE_LABEL, SUPPLY_CATEGORIES, PROJECT_CATEGORIES } from '../constants'
+import CountrySelect from './CountrySelect'
 
 interface Country {
   code: string
@@ -369,12 +370,7 @@ export default function Account({ lang }: { lang: Lang }) {
 
           <div>
             <label className={label}>{i.country}</label>
-            <select className={input} value={country} onChange={(e) => setCountry(e.target.value)}>
-              <option value="">-</option>
-              {countries.map((c) => (
-                <option key={c.code} value={c.code}>{lang === 'zh' ? c.name_zh : c.name_en}</option>
-              ))}
-            </select>
+            <CountrySelect lang={lang} countries={countries} value={country} onChange={setCountry} placeholder={i.selectCountry} />
           </div>
 
           {error && <p className="text-sm text-zte-red">{error}</p>}
