@@ -26,6 +26,8 @@ interface PublicMember {
   employment_status: string | null
   level: string | null
   member_type: string
+  referrer_name: string | null
+  referrer_name_en: string | null
 }
 
 export default function People({ lang }: { lang: Lang }) {
@@ -226,7 +228,7 @@ export default function People({ lang }: { lang: Lang }) {
                   {m.name_en && <p className="text-gray-500">{m.name_en}</p>}
                   <p>📍 {location(m)}</p>
                   {m.referrer_name && (
-                    <p className="text-xs text-gray-400">🤝 {lang === 'zh' ? `通过 ${m.referrer_name} 推荐` : `Recommended by ${m.referrer_name}`}</p>
+                    <p className="text-xs text-gray-400">🤝 {lang === 'zh' ? `通过 ${m.referrer_name} 推荐` : `Recommended by ${m.referrer_name_en || m.referrer_name}`}</p>
                   )}
                   {(m.era_start || m.era_end) && (
                     <p>🕐 {m.era_start}{m.era_end ? `–${m.era_end}` : '–'}</p>
