@@ -85,8 +85,8 @@ const enHref = alt('en')
           <AuthNav lang={lang} client:only="react" />
           <span class="text-paper/25">|</span>
           <div class="flex items-center gap-1 text-xs">
-            <a href={zhHref} onclick="localStorage.setItem('zteist_lang','zh')" class={`px-2 py-1 rounded ${lang === 'zh' ? 'bg-jade text-ink' : 'text-paper/70 hover:text-paper'}`}>中文</a>
-            <a href={enHref} onclick="localStorage.setItem('zteist_lang','en')" class={`px-2 py-1 rounded ${lang === 'en' ? 'bg-jade text-ink' : 'text-paper/70 hover:text-paper'}`}>EN</a>
+            <a href={zhHref} data-lang-toggle="zh" onclick="localStorage.setItem('zteist_lang','zh')" class={`px-2 py-1 rounded ${lang === 'zh' ? 'bg-jade text-ink' : 'text-paper/70 hover:text-paper'}`}>中文</a>
+            <a href={enHref} data-lang-toggle="en" onclick="localStorage.setItem('zteist_lang','en')" class={`px-2 py-1 rounded ${lang === 'en' ? 'bg-jade text-ink' : 'text-paper/70 hover:text-paper'}`}>EN</a>
           </div>
         </div>
       </div>
@@ -136,6 +136,17 @@ const enHref = alt('en')
           navigator.serviceWorker.register('/sw.js').catch(function () {})
         })
       }
+    </script>
+
+    <!-- 邀请落地页语言切换：保留 /zh|en/i/CODE 里的 CODE，只换语言前缀 -->
+    <script is:inline>
+      ;(function () {
+        var m = window.location.pathname.match(/^\/(zh|en)\/i\/([A-Za-z0-9]+)/)
+        if (!m) return
+        document.querySelectorAll('a[data-lang-toggle]').forEach(function (a) {
+          a.setAttribute('href', '/' + a.getAttribute('data-lang-toggle') + '/i/' + m[2])
+        })
+      })()
     </script>
   </body>
 </html>
