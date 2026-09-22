@@ -257,15 +257,6 @@ export default function Account({ lang }: { lang: Lang }) {
               <span className="ml-2 text-xs px-2 py-0.5 rounded-full bg-zte-blue text-white">{paidTierLabel()}</span>
             )}
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-gray-500">{i.shareCode}：</span>
-            <span className="font-mono font-semibold text-zte-navy">{shareCode || '—'}</span>
-            {shareCode && (
-              <button onClick={() => copyText(shareCode, 'code')} className="text-xs text-zte-blue border border-zte-blue rounded px-2 py-0.5 hover:opacity-70">
-                {copied === 'code' ? '✓' : i.copy}
-              </button>
-            )}
-          </div>
           {shareCode && (
             <div className="flex items-center gap-2 w-full">
               <span className="text-gray-500 shrink-0">{i.inviteLink}：</span>
