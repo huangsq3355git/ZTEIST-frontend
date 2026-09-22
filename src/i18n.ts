@@ -86,6 +86,7 @@ export interface Messages {
   myPosts: string
   close: string
   copy: string
+  copyInviteLink: string
   logout: string
   inviteLink: string
   editProfile: string
@@ -175,6 +176,7 @@ const zh: Messages = {
   myPosts: '我的发布',
   close: '下架',
   copy: '复制',
+  copyInviteLink: '复制邀请链接',
   logout: '退出',
   inviteLink: '我的邀请链接',
   editProfile: '编辑资料',
@@ -264,6 +266,7 @@ const en: Messages = {
   myPosts: 'My Posts',
   close: 'Close',
   copy: 'Copy',
+  copyInviteLink: 'Copy invite link',
   logout: 'Logout',
   inviteLink: 'My invite link',
   editProfile: 'Edit profile',

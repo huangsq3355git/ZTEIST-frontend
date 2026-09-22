@@ -225,7 +225,7 @@ export default function Account({ lang }: { lang: Lang }) {
                 <div className="mt-3 flex items-center gap-2">
                   <span className="text-xs text-gray-500 truncate">{shareLink}</span>
                   <button onClick={() => copyText(shareLink, 'welcomelink')} className="shrink-0 text-xs text-zte-blue border border-zte-blue rounded px-2 py-0.5 hover:opacity-70">
-                    {copied === 'welcomelink' ? '✓' : i.copy}
+                    {copied === 'welcomelink' ? '✓' : i.copyInviteLink}
                   </button>
                 </div>
               )}
@@ -262,7 +262,7 @@ export default function Account({ lang }: { lang: Lang }) {
               <span className="text-gray-500 shrink-0">{i.inviteLink}：</span>
               <span className="text-xs text-gray-500 truncate">{shareLink}</span>
               <button onClick={() => copyText(shareLink, 'link')} className="text-xs text-zte-blue border border-zte-blue rounded px-2 py-0.5 hover:opacity-70 shrink-0">
-                {copied === 'link' ? '✓' : i.copy}
+                {copied === 'link' ? '✓' : i.copyInviteLink}
               </button>
             </div>
           )}
