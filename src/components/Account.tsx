@@ -62,7 +62,7 @@ export default function Account({ lang }: { lang: Lang }) {
     const t = token()
     if (!t) return
     const headers = { Authorization: `Bearer ${t}` }
-    fetch('/api/member/me')
+    fetch('/api/member/me', { headers })
       .then((r) => r.json())
       .then((m) => {
         setMe(m)
