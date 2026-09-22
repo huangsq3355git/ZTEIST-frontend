@@ -12,6 +12,12 @@ export const MEMBER_TYPE_LABEL: Record<string, { zh: string; en: string }> = {
   user: { zh: '普通', en: 'Member' },
 }
 
+// 付费档位 → 徽章文案（Stripe 支付后 paid_tier 字段）
+export const PAID_TIER_LABEL: Record<string, { zh: string; en: string }> = {
+  supporter: { zh: '支持会员', en: 'Supporting Member' },
+  enterprise: { zh: '企业会员', en: 'Enterprise Member' },
+}
+
 // 供求分类 + 项目类型
 export const SUPPLY_CATEGORIES = ['项目', '产品', '资源', '合作']
 export const PROJECT_CATEGORIES = ['出海', '本地化', '技术合作', '供应链', '落地服务']

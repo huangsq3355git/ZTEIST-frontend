@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { t, type Lang } from '../i18n'
-import { MEMBER_TYPE_LABEL, SUPPLY_CATEGORIES, PROJECT_CATEGORIES } from '../constants'
+import { MEMBER_TYPE_LABEL, PAID_TIER_LABEL, SUPPLY_CATEGORIES, PROJECT_CATEGORIES } from '../constants'
 import CountrySelect from './CountrySelect'
 
 interface Country {
@@ -13,6 +13,7 @@ interface Country {
 export default function Account({ lang }: { lang: Lang }) {
   const i = t(lang)
   const [memberType, setMemberType] = useState('')
+  const [paidTier, setPaidTier] = useState('')
   const [shareCode, setShareCode] = useState('')
   const [posts, setPosts] = useState<any[]>([])
   const [countries, setCountries] = useState<Country[]>([])
@@ -60,7 +61,10 @@ export default function Account({ lang }: { lang: Lang }) {
     const headers = { Authorization: `Bearer ${t}` }
     fetch('/api/member/me')
       .then((r) => r.json())
-      .then((m) => setMemberType(m?.member_type || ''))
+      .then((m) => {
+        setMemberType(m?.member_type || '')
+        setPaidTier(m?.paid_tier || '')
+      })
       .catch(() => {})
     fetch('/api/invite/generate', { headers })
       .then((r) => r.json())
@@ -175,6 +179,11 @@ export default function Account({ lang }: { lang: Lang }) {
     return l ? (lang === 'zh' ? l.zh : l.en) : memberType
   }
 
+  const paidTierLabel = () => {
+    const l = PAID_TIER_LABEL[paidTier]
+    return l ? (lang === 'zh' ? l.zh : l.en) : ''
+  }
+
   const tiers =
     lang === 'zh'
       ? [
@@ -203,6 +212,9 @@ export default function Account({ lang }: { lang: Lang }) {
           <div>
             <span className="text-gray-500">{i.myLevel}：</span>
             <span className="font-semibold text-zte-blue">{memberTypeLabel()}</span>
+            {paidTierLabel() && (
+              <span className="ml-2 text-xs px-2 py-0.5 rounded-full bg-zte-blue text-white">{paidTierLabel()}</span>
+            )}
           </div>
           <div className="flex items-center gap-2">
             <span className="text-gray-500">{i.shareCode}：</span>
