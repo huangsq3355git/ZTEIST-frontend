@@ -93,6 +93,8 @@ export interface Messages {
   editSaved: string
   residenceCountries: string
   residedIn: string
+  welcomeInvite: string
+  welcomeInviteSub: string
 }
 
 const zh: Messages = {
@@ -180,6 +182,8 @@ const zh: Messages = {
   editSaved: '已保存',
   residenceCountries: '常驻国家（曾长期驻外，选填）',
   residedIn: '常驻过',
+  welcomeInvite: '邀请老同事，让更多中兴人回家',
+  welcomeInviteSub: '把下面的邀请链接发给你的老同事，一起重聚中友会',
 }
 
 const en: Messages = {
@@ -267,6 +271,8 @@ const en: Messages = {
   editSaved: 'Saved',
   residenceCountries: 'Residence countries (where you were stationed)',
   residedIn: 'Resided in',
+  welcomeInvite: 'Invite old colleagues — bring more ZTE people home',
+  welcomeInviteSub: 'Share your invite link with old colleagues and reunite on ZTEIST',
 }
 
 export function t(lang: Lang): Messages {

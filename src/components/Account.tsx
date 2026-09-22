@@ -17,6 +17,7 @@ export default function Account({ lang }: { lang: Lang }) {
   const [paidTier, setPaidTier] = useState('')
   const [me, setMe] = useState<any>(null)
   const [showEdit, setShowEdit] = useState(false)
+  const [showWelcome, setShowWelcome] = useState(false)
   const [shareCode, setShareCode] = useState('')
   const [posts, setPosts] = useState<any[]>([])
   const [countries, setCountries] = useState<Country[]>([])
@@ -51,6 +52,7 @@ export default function Account({ lang }: { lang: Lang }) {
   }
 
   useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('welcome') === '1') setShowWelcome(true)
     fetch('/api/countries')
       .then((r) => r.json())
       .then((c: Country[]) => setCountries(c))
@@ -212,6 +214,26 @@ export default function Account({ lang }: { lang: Lang }) {
           <button onClick={logout} className="text-sm text-zte-red hover:opacity-70">{i.logout}</button>
         </div>
       </div>
+
+      {showWelcome && (
+        <div className="bg-zte-blue/5 border border-zte-blue/30 rounded-xl p-5 mb-6">
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <p className="font-semibold text-zte-navy">{i.welcomeInvite}</p>
+              <p className="text-sm text-gray-600 mt-1">{i.welcomeInviteSub}</p>
+              {shareCode && (
+                <div className="mt-3 flex items-center gap-2">
+                  <span className="text-xs text-gray-500 truncate">{shareLink}</span>
+                  <button onClick={() => copyText(shareLink, 'welcomelink')} className="shrink-0 text-xs text-zte-blue border border-zte-blue rounded px-2 py-0.5 hover:opacity-70">
+                    {copied === 'welcomelink' ? '✓' : i.copy}
+                  </button>
+                </div>
+              )}
+            </div>
+            <button onClick={() => setShowWelcome(false)} className="text-gray-400 hover:text-gray-600 text-xl leading-none shrink-0" aria-label="close">×</button>
+          </div>
+        </div>
+      )}
 
       {showEdit && me && (
         <ProfileEdit

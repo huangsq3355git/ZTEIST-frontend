@@ -213,7 +213,7 @@ export default function Register({ lang }: { lang: Lang }) {
       if (data.inviteWarning) {
         window.alert(lang === 'en' ? 'Invalid invite code, ignored.' : '邀请码无效，已忽略。')
       }
-      window.location.href = `/${lang === 'en' ? 'en' : 'zh'}/account/`
+      window.location.href = `/${lang === 'en' ? 'en' : 'zh'}/account/?welcome=1`
     } catch (e) {
       setError((e as Error).message || i.error)
     } finally {
