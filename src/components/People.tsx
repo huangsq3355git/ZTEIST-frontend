@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { t, type Lang } from '../i18n'
-import { PRODUCT_LINES, TECH_DOMAINS, INDUSTRIES, EMPLOYMENT_STATUSES, MEMBER_TYPE_LABEL } from '../constants'
+import { PRODUCT_LINES, TECH_DOMAINS, INDUSTRIES, EMPLOYMENT_STATUSES, MEMBER_TYPE_LABEL, PAID_TIER_LABEL } from '../constants'
 import CountrySelect from './CountrySelect'
 
 interface Country {
@@ -26,6 +26,7 @@ interface PublicMember {
   employment_status: string | null
   level: string | null
   member_type: string
+  paid_tier: string | null
   referrer_name: string | null
   referrer_name_en: string | null
   residence_countries: string
@@ -70,6 +71,11 @@ export default function People({ lang }: { lang: Lang }) {
   const memberBadge = (mt: string) => {
     const l = MEMBER_TYPE_LABEL[mt]
     return l ? (lang === 'zh' ? l.zh : l.en) : mt
+  }
+
+  const paidTierLabel = (pt: string) => {
+    const l = PAID_TIER_LABEL[pt]
+    return l ? (lang === 'zh' ? l.zh : l.en) : ''
   }
 
   async function search() {
@@ -221,12 +227,14 @@ export default function People({ lang }: { lang: Lang }) {
                   <span className="font-semibold text-zte-navy">{m.name}</span>
                   <span
                     className={`text-xs px-2 py-0.5 rounded-full ${
-                      m.member_type === 'member' || m.member_type === 'expert'
+                      m.paid_tier
+                        ? 'bg-zte-orange text-white'
+                        : m.member_type === 'member' || m.member_type === 'expert'
                         ? 'bg-zte-blue text-white'
                         : 'bg-gray-100 text-gray-500'
                     }`}
                   >
-                    {memberBadge(m.member_type)}
+                    {m.paid_tier ? paidTierLabel(m.paid_tier) : memberBadge(m.member_type)}
                   </span>
                 </div>
                 <div className="text-sm text-gray-600 space-y-1">
@@ -291,7 +299,9 @@ export default function People({ lang }: { lang: Lang }) {
               {detail.whatsapp && <p>WhatsApp: {detail.whatsapp}</p>}
               {!detail.email && !detail.wechat && !detail.phone && !detail.linkedin && !detail.whatsapp && (
                 <p className="text-gray-400">
-                  {lang === 'zh' ? '联系方式仅认证会员、同部门同事或管理员可见。' : 'Contact info is visible only to verified members, same-department colleagues, or admins.'}
+                  {detail.has_contact
+                    ? (lang === 'zh' ? '联系方式仅认证会员、同部门同事或管理员可见。' : 'Contact info is visible only to verified members, same-department colleagues, or admins.')
+                    : (lang === 'zh' ? '该会员暂未填写联系方式。' : "This member hasn't added contact info.")}
                 </p>
               )}
             </div>
