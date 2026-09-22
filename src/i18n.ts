@@ -88,6 +88,11 @@ export interface Messages {
   copy: string
   logout: string
   inviteLink: string
+  editProfile: string
+  save: string
+  editSaved: string
+  residenceCountries: string
+  residedIn: string
 }
 
 const zh: Messages = {
@@ -170,6 +175,11 @@ const zh: Messages = {
   copy: '复制',
   logout: '退出',
   inviteLink: '邀请链接',
+  editProfile: '编辑资料',
+  save: '保存',
+  editSaved: '已保存',
+  residenceCountries: '常驻国家（曾长期驻外，选填）',
+  residedIn: '常驻过',
 }
 
 const en: Messages = {
@@ -252,6 +262,11 @@ const en: Messages = {
   copy: 'Copy',
   logout: 'Logout',
   inviteLink: 'Invite link',
+  editProfile: 'Edit profile',
+  save: 'Save',
+  editSaved: 'Saved',
+  residenceCountries: 'Residence countries (where you were stationed)',
+  residedIn: 'Resided in',
 }
 
 export function t(lang: Lang): Messages {

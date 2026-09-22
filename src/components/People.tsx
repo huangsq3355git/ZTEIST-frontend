@@ -28,6 +28,7 @@ interface PublicMember {
   member_type: string
   referrer_name: string | null
   referrer_name_en: string | null
+  residence_countries: string
 }
 
 export default function People({ lang }: { lang: Lang }) {
@@ -61,6 +62,10 @@ export default function People({ lang }: { lang: Lang }) {
   // 所在地：国内(CN)显示省份，海外显示国家
   const location = (m: PublicMember) =>
     m.country === 'CN' ? m.province || countryName('CN') : countryName(m.country)
+
+  // 常驻国家列表（逗号分隔码 → 名称）
+  const residenceList = (codes: string) =>
+    codes ? codes.split(',').filter(Boolean).map((c) => countryName(c)).join(lang === 'zh' ? '、' : ', ') : ''
 
   const memberBadge = (mt: string) => {
     const l = MEMBER_TYPE_LABEL[mt]
@@ -227,6 +232,9 @@ export default function People({ lang }: { lang: Lang }) {
                 <div className="text-sm text-gray-600 space-y-1">
                   {m.name_en && <p className="text-gray-500">{m.name_en}</p>}
                   <p>📍 {location(m)}</p>
+                  {m.residence_countries && (
+                    <p className="text-xs text-gray-400">🏠 {i.residedIn}: {residenceList(m.residence_countries)}</p>
+                  )}
                   {m.referrer_name && (
                     <p className="text-xs text-gray-400">🤝 {lang === 'zh' ? `通过 ${m.referrer_name} 推荐` : `Recommended by ${m.referrer_name_en || m.referrer_name}`}</p>
                   )}
@@ -263,6 +271,9 @@ export default function People({ lang }: { lang: Lang }) {
             </div>
             <div className="text-sm text-gray-600 space-y-1.5 mb-4">
               {detail.country && <p>📍 {location(detail as PublicMember)}</p>}
+              {detail.residence_countries && (
+                <p className="text-xs text-gray-400">🏠 {i.residedIn}: {residenceList(detail.residence_countries)}</p>
+              )}
               {(detail.era_start || detail.era_end) && <p>🕐 {detail.era_start}{detail.era_end ? `–${detail.era_end}` : '–'}</p>}
               {detail.product_line && <p>{i.productLine}: {detail.product_line}</p>}
               {detail.role && <p>{i.role}: {detail.role}</p>}

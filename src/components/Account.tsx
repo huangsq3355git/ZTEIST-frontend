@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { t, type Lang } from '../i18n'
 import { MEMBER_TYPE_LABEL, PAID_TIER_LABEL, SUPPLY_CATEGORIES, PROJECT_CATEGORIES } from '../constants'
 import CountrySelect from './CountrySelect'
+import ProfileEdit from './ProfileEdit'
 
 interface Country {
   code: string
@@ -14,6 +15,8 @@ export default function Account({ lang }: { lang: Lang }) {
   const i = t(lang)
   const [memberType, setMemberType] = useState('')
   const [paidTier, setPaidTier] = useState('')
+  const [me, setMe] = useState<any>(null)
+  const [showEdit, setShowEdit] = useState(false)
   const [shareCode, setShareCode] = useState('')
   const [posts, setPosts] = useState<any[]>([])
   const [countries, setCountries] = useState<Country[]>([])
@@ -62,6 +65,7 @@ export default function Account({ lang }: { lang: Lang }) {
     fetch('/api/member/me')
       .then((r) => r.json())
       .then((m) => {
+        setMe(m)
         setMemberType(m?.member_type || '')
         setPaidTier(m?.paid_tier || '')
       })
@@ -203,8 +207,23 @@ export default function Account({ lang }: { lang: Lang }) {
     <div className="max-w-4xl mx-auto p-6">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-zte-navy">{i.memberCenter}</h1>
-        <button onClick={logout} className="text-sm text-zte-red hover:opacity-70">{i.logout}</button>
+        <div className="flex items-center gap-4">
+          <button onClick={() => setShowEdit(!showEdit)} className="text-sm text-zte-blue hover:opacity-70">{i.editProfile}</button>
+          <button onClick={logout} className="text-sm text-zte-red hover:opacity-70">{i.logout}</button>
+        </div>
       </div>
+
+      {showEdit && me && (
+        <ProfileEdit
+          lang={lang}
+          member={me}
+          countries={countries}
+          onSaved={() => {
+            setShowEdit(false)
+            load()
+          }}
+        />
+      )}
 
       {/* 我的身份 */}
       <section className="bg-white p-5 rounded-xl shadow-sm mb-6">

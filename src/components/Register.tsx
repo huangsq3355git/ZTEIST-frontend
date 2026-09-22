@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { t, type Lang } from '../i18n'
 import CountrySelect from './CountrySelect'
+import CountryMultiSelect from './CountryMultiSelect'
 
 interface Country {
   code: string
@@ -42,6 +43,7 @@ export default function Register({ lang }: { lang: Lang }) {
   const [name, setName] = useState('')
   const [nameEn, setNameEn] = useState('')
   const [country, setCountry] = useState('')
+  const [residenceCountries, setResidenceCountries] = useState<string[]>([])
   const [eraStart, setEraStart] = useState('')
   const [eraEnd, setEraEnd] = useState('')
   const [productLine, setProductLine] = useState('')
@@ -191,6 +193,7 @@ export default function Register({ lang }: { lang: Lang }) {
           name,
           nameEn,
           country,
+          residenceCountries,
           eraStart: eraStart ? Number(eraStart) : null,
           eraEnd: eraEnd ? Number(eraEnd) : null,
           productLine,
@@ -302,6 +305,10 @@ export default function Register({ lang }: { lang: Lang }) {
             <div>
               <label className="block text-sm font-medium mb-1">{i.country} *</label>
               <CountrySelect lang={lang} countries={countries} value={country} onChange={setCountry} placeholder={i.selectCountry} />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">{i.residenceCountries}</label>
+              <CountryMultiSelect lang={lang} countries={countries} value={residenceCountries} onChange={setResidenceCountries} placeholder={i.selectCountry} />
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
