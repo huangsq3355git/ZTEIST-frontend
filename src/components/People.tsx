@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { t, type Lang } from '../i18n'
-import { PRODUCT_LINES, TECH_DOMAINS, INDUSTRIES, EMPLOYMENT_STATUSES, MEMBER_TYPE_LABEL, PAID_TIER_LABEL } from '../constants'
+import { PRODUCT_LINES, TECH_DOMAINS, INDUSTRIES, EMPLOYMENT_STATUSES, MEMBER_TYPE_LABEL, PAID_TIER_LABEL, PRODUCT_LINE_LABELS, TECH_DOMAIN_LABELS, INDUSTRY_LABELS, EMPLOYMENT_STATUS_LABELS, valueLabel } from '../constants'
 import CountrySelect from './CountrySelect'
 
 interface Country {
@@ -158,7 +158,7 @@ export default function People({ lang }: { lang: Lang }) {
             <select className={input} value={productLine} onChange={(e) => setProductLine(e.target.value)}>
               <option value="">-</option>
               {PRODUCT_LINES.map((p) => (
-                <option key={p} value={p}>{p}</option>
+                <option key={p} value={p}>{valueLabel(PRODUCT_LINE_LABELS, p, lang)}</option>
               ))}
             </select>
           </div>
@@ -167,7 +167,7 @@ export default function People({ lang }: { lang: Lang }) {
             <select className={input} value={techDomain} onChange={(e) => setTechDomain(e.target.value)}>
               <option value="">-</option>
               {TECH_DOMAINS.map((p) => (
-                <option key={p} value={p}>{p}</option>
+                <option key={p} value={p}>{valueLabel(TECH_DOMAIN_LABELS, p, lang)}</option>
               ))}
             </select>
           </div>
@@ -176,7 +176,7 @@ export default function People({ lang }: { lang: Lang }) {
             <select className={input} value={industry} onChange={(e) => setIndustry(e.target.value)}>
               <option value="">-</option>
               {INDUSTRIES.map((p) => (
-                <option key={p} value={p}>{p}</option>
+                <option key={p} value={p}>{valueLabel(INDUSTRY_LABELS, p, lang)}</option>
               ))}
             </select>
           </div>
@@ -185,7 +185,7 @@ export default function People({ lang }: { lang: Lang }) {
             <select className={input} value={employmentStatus} onChange={(e) => setEmploymentStatus(e.target.value)}>
               <option value="">-</option>
               {EMPLOYMENT_STATUSES.map((p) => (
-                <option key={p} value={p}>{p}</option>
+                <option key={p} value={p}>{valueLabel(EMPLOYMENT_STATUS_LABELS, p, lang)}</option>
               ))}
             </select>
           </div>
@@ -249,10 +249,10 @@ export default function People({ lang }: { lang: Lang }) {
                   {(m.era_start || m.era_end) && (
                     <p>🕐 {m.era_start}{m.era_end ? `–${m.era_end}` : '–'}</p>
                   )}
-                  {m.product_line && <p>{i.productLine}: {m.product_line}</p>}
+                  {m.product_line && <p>{i.productLine}: {valueLabel(PRODUCT_LINE_LABELS, m.product_line, lang)}</p>}
                   {m.role && <p>{i.role}: {m.role}</p>}
-                  {m.tech_domain && <p>{i.techDomain}: {m.tech_domain}</p>}
-                  {m.industry && <p>{i.industry}: {m.industry}</p>}
+                  {m.tech_domain && <p>{i.techDomain}: {valueLabel(TECH_DOMAIN_LABELS, m.tech_domain, lang)}</p>}
+                  {m.industry && <p>{i.industry}: {valueLabel(INDUSTRY_LABELS, m.industry, lang)}</p>}
                   {m.level && <p>{i.level}: {m.level}</p>}
                 </div>
                 <button
@@ -283,11 +283,11 @@ export default function People({ lang }: { lang: Lang }) {
                 <p className="text-xs text-gray-400">🏠 {i.residedIn}: {residenceList(detail.residence_countries)}</p>
               )}
               {(detail.era_start || detail.era_end) && <p>🕐 {detail.era_start}{detail.era_end ? `–${detail.era_end}` : '–'}</p>}
-              {detail.product_line && <p>{i.productLine}: {detail.product_line}</p>}
+              {detail.product_line && <p>{i.productLine}: {valueLabel(PRODUCT_LINE_LABELS, detail.product_line, lang)}</p>}
               {detail.role && <p>{i.role}: {detail.role}</p>}
-              {detail.tech_domain && <p>{i.techDomain}: {detail.tech_domain}</p>}
+              {detail.tech_domain && <p>{i.techDomain}: {valueLabel(TECH_DOMAIN_LABELS, detail.tech_domain, lang)}</p>}
               {detail.department && <p>{lang === 'zh' ? '部门' : 'Department'}: {detail.department}</p>}
-              {detail.industry && <p>{i.industry}: {detail.industry}</p>}
+              {detail.industry && <p>{i.industry}: {valueLabel(INDUSTRY_LABELS, detail.industry, lang)}</p>}
               {detail.level && <p>{i.level}: {detail.level}</p>}
             </div>
             <div className="border-t border-gray-100 pt-3 text-sm space-y-1">

@@ -1,6 +1,16 @@
 import { useState } from 'react'
 import { t, type Lang } from '../i18n'
-import { PRODUCT_LINES, TECH_DOMAINS, INDUSTRIES, EMPLOYMENT_STATUSES } from '../constants'
+import {
+  PRODUCT_LINES,
+  TECH_DOMAINS,
+  INDUSTRIES,
+  EMPLOYMENT_STATUSES,
+  PRODUCT_LINE_LABELS,
+  TECH_DOMAIN_LABELS,
+  INDUSTRY_LABELS,
+  EMPLOYMENT_STATUS_LABELS,
+  valueLabel,
+} from '../constants'
 import CountrySelect from './CountrySelect'
 import CountryMultiSelect from './CountryMultiSelect'
 
@@ -142,7 +152,7 @@ export default function ProfileEdit({
             <select className={input} value={productLine} onChange={(e) => setProductLine(e.target.value)}>
               <option value="">-</option>
               {PRODUCT_LINES.map((p) => (
-                <option key={p} value={p}>{p}</option>
+                <option key={p} value={p}>{valueLabel(PRODUCT_LINE_LABELS, p, lang)}</option>
               ))}
             </select>
           </div>
@@ -157,7 +167,7 @@ export default function ProfileEdit({
             <select className={input} value={techDomain} onChange={(e) => setTechDomain(e.target.value)}>
               <option value="">-</option>
               {TECH_DOMAINS.map((p) => (
-                <option key={p} value={p}>{p}</option>
+                <option key={p} value={p}>{valueLabel(TECH_DOMAIN_LABELS, p, lang)}</option>
               ))}
             </select>
           </div>
@@ -166,7 +176,7 @@ export default function ProfileEdit({
             <select className={input} value={industry} onChange={(e) => setIndustry(e.target.value)}>
               <option value="">-</option>
               {INDUSTRIES.map((p) => (
-                <option key={p} value={p}>{p}</option>
+                <option key={p} value={p}>{valueLabel(INDUSTRY_LABELS, p, lang)}</option>
               ))}
             </select>
           </div>
@@ -181,7 +191,7 @@ export default function ProfileEdit({
             <select className={input} value={employmentStatus} onChange={(e) => setEmploymentStatus(e.target.value)}>
               <option value="">-</option>
               {EMPLOYMENT_STATUSES.map((p) => (
-                <option key={p} value={p}>{p}</option>
+                <option key={p} value={p}>{valueLabel(EMPLOYMENT_STATUS_LABELS, p, lang)}</option>
               ))}
             </select>
           </div>
