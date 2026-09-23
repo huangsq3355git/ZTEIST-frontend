@@ -68,6 +68,10 @@ export default function People({ lang }: { lang: Lang }) {
   const residenceList = (codes: string) =>
     codes ? codes.split(',').filter(Boolean).map((c) => countryName(c)).join(lang === 'zh' ? '、' : ', ') : ''
 
+  // 名字：英文界面优先英文名，中文界面中文名
+  const nameOf = (m: any) => (lang === 'en' ? m.name_en || m.name : m.name)
+  const nameSecondary = (m: any) => (lang === 'en' ? (m.name_en ? m.name : '') : m.name_en || '')
+
   const memberBadge = (mt: string) => {
     const l = MEMBER_TYPE_LABEL[mt]
     return l ? (lang === 'zh' ? l.zh : l.en) : mt
@@ -224,7 +228,7 @@ export default function People({ lang }: { lang: Lang }) {
             {results.map((m) => (
               <div key={m.id} className="bg-white p-4 rounded-xl shadow-sm" style={{ borderTop: '3px solid #008ED3' }}>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-semibold text-zte-navy">{m.name}</span>
+                  <span className="font-semibold text-zte-navy">{nameOf(m)}</span>
                   <span
                     className={`text-xs px-2 py-0.5 rounded-full ${
                       m.paid_tier
@@ -238,7 +242,7 @@ export default function People({ lang }: { lang: Lang }) {
                   </span>
                 </div>
                 <div className="text-sm text-gray-600 space-y-1">
-                  {m.name_en && <p className="text-gray-500">{m.name_en}</p>}
+                  {nameSecondary(m) && <p className="text-gray-500">{nameSecondary(m)}</p>}
                   <p>📍 {location(m)}</p>
                   {m.residence_countries && (
                     <p className="text-xs text-gray-400">🏠 {i.residedIn}: {residenceList(m.residence_countries)}</p>
@@ -273,7 +277,7 @@ export default function People({ lang }: { lang: Lang }) {
           <div className="bg-white rounded-xl p-6 max-w-md w-full max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-bold text-zte-navy">
-                {detail.name}{detail.name_en ? ` (${detail.name_en})` : ''}
+                {nameOf(detail)}{nameSecondary(detail) ? ` (${nameSecondary(detail)})` : ''}
               </h3>
               <button onClick={() => setDetail(null)} className="text-gray-400 hover:text-gray-600 text-xl leading-none">✕</button>
             </div>
