@@ -31,8 +31,8 @@ const prefix = lang === 'en' ? '/en' : '/zh'
     </button>
   </section>
 
-  <!-- 5 个业务模块 -->
-  <section class="anim-later grid grid-cols-5 gap-2 max-w-xl mx-auto px-4 mt-6">
+  <!-- 5 个业务模块：小C 吉祥物居中（无外框，突出） -->
+  <section class="anim-later grid grid-cols-5 items-center gap-2 max-w-xl mx-auto px-4 mt-6">
     <a href={`${prefix}/people/`} class="rounded-lg border-2 border-zte-blue bg-white py-2 text-center hover:shadow-md transition-shadow">
       <span class="block text-xl">👥</span>
       <span class="block mt-0.5 text-xs font-semibold text-zte-navy">{i.people}</span>
@@ -40,6 +40,10 @@ const prefix = lang === 'en' ? '/en' : '/zh'
     <a href={`${prefix}/market/`} class="rounded-lg border-2 border-zte-red bg-white py-2 text-center hover:shadow-md transition-shadow">
       <span class="block text-xl">🤝</span>
       <span class="block mt-0.5 text-xs font-semibold text-zte-navy">{i.supplyDemand}</span>
+    </a>
+    <a href="https://www.silentpair.com" target="_blank" rel="noopener" class="flex flex-col items-center justify-center gap-0.5 group">
+      <img src="/xiaoc.png?v=1" alt="C" class="h-16 w-16 object-contain transition-transform group-hover:scale-110" />
+      <span class="text-xs font-semibold text-zte-navy">C</span>
     </a>
     <a href={`${prefix}/projects/`} class="rounded-lg border-2 border-zte-navy bg-white py-2 text-center hover:shadow-md transition-shadow">
       <span class="block text-xl">📋</span>
@@ -49,10 +53,6 @@ const prefix = lang === 'en' ? '/en' : '/zh'
       <span class="block text-xl">🔍</span>
       <span class="block mt-0.5 text-xs font-semibold text-zte-navy">{i.dueDiligence}</span>
     </div>
-    <a href="https://www.silentpair.com" target="_blank" rel="noopener" class="rounded-lg border-2 border-zte-orange bg-white py-2 text-center hover:shadow-md transition-shadow">
-      <img src="/xiaoc.png?v=1" alt="C" class="h-8 w-8 mx-auto object-contain" />
-      <span class="block mt-0.5 text-xs font-semibold text-zte-navy">C</span>
-    </a>
   </section>
 
   <script>
