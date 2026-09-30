@@ -78,6 +78,7 @@ export interface Messages {
   askZ: string
   greetBubble: string
   dueDiligence: string
+  memberEnterprises: string
   // 会员中心
   memberCenter: string
   myLevel: string
@@ -169,6 +170,7 @@ const zh: Messages = {
   askZ: '问问小Z',
   greetBubble: '嗨，我是小Z 🍀',
   dueDiligence: '背景调查',
+  memberEnterprises: '会员企业',
   memberCenter: '会员中心',
   myLevel: '我的等级',
   shareCode: '专属分享码',
@@ -259,6 +261,7 @@ const en: Messages = {
   askZ: 'Come to ask Z',
   greetBubble: "Hi, I'm Z 🍀",
   dueDiligence: 'Due Diligence',
+  memberEnterprises: 'Member Enterprises',
   memberCenter: 'Member Center',
   myLevel: 'My level',
   shareCode: 'Invite code',
